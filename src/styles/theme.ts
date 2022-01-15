@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material";
 
-const openSans = `Open Sans', sans-serif`;
+const openSans = `'Open Sans', sans-serif`;
 
 export const theme = createTheme({
   typography: {

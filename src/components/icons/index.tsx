@@ -51,3 +51,17 @@ export function PlusSignIcon() {
     </svg>
   );
 }
+
+export function ChevronDownIcon() {
+  return (
+    <svg width="18" height="10" viewBox="0 0 18 10" fill="none">
+      <path
+        d="M1 1L9 9L17 1"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  );
+}
