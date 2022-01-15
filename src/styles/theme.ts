@@ -60,5 +60,11 @@ export const theme = {
       2: "0px 4px 24px 0px #5D3EBC0A",
       3: "0px 1px 7px 0px #5D38C066",
     },
+    background: {
+      default: "#FAFAFA",
+    },
+  },
+  shape: {
+    borderRadius: "2px",
   },
 };
