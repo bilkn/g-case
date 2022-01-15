@@ -1,8 +1,10 @@
+import { createTheme } from "@mui/material";
+
 const openSans = `Open Sans', sans-serif`;
 
-export const theme = {
+export const theme = createTheme({
   typography: {
-    htmlFontSize: "62.5%", // 10px
+    htmlFontSize: 10,
     fontFamily: openSans,
     h1: {
       fontFamily: openSans,
@@ -40,6 +42,9 @@ export const theme = {
   },
   palette: {
     mode: "light",
+    common: {
+      white: "#fff",
+    },
     primary: {
       main: "#1EA4CE",
       contrastText: "#fff",
@@ -56,17 +61,12 @@ export const theme = {
     text: {
       primary: "#191919",
       secondary: "#525252",
-      ternary: "#697488",
     },
     action: {
       selected: "#1EA4CE",
     },
     divider: "#F4F4F4",
-    shadows: {
-      1: "0px 6px 24px 0px #5D3EBC0A",
-      2: "0px 4px 24px 0px #5D3EBC0A",
-      3: "0px 1px 7px 0px #5D38C066",
-    },
+
     background: {
       default: "#FAFAFA",
     },
@@ -74,4 +74,4 @@ export const theme = {
   shape: {
     borderRadius: "2px",
   },
-};
+});
