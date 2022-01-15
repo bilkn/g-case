@@ -54,5 +54,11 @@ export const theme = {
     action: {
       selected: "#1EA4CE",
     },
+    divider: "#F4F4F4",
+    shadows: {
+      1: "0px 6px 24px 0px #5D3EBC0A",
+      2: "0px 4px 24px 0px #5D3EBC0A",
+      3: "0px 1px 7px 0px #5D38C066",
+    },
   },
 };
