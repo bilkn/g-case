@@ -1,12 +1,8 @@
 import React from "react";
-import { Header } from "./components";
+import AppRoute from "./AppRoute";
 
 function App() {
-  return (
-    <div>
-      <Header>hello</Header>
-    </div>
-  );
+  return <AppRoute />;
 }
 
 export default App;
