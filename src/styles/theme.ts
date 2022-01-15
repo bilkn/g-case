@@ -11,6 +11,13 @@ export const theme = {
       lineHeight: 1.3,
       letterSpacing: "0.0125em",
     },
+    h2: {
+      fontFamily: openSans,
+      fontWeight: 600,
+      fontSize: "1.3rem",
+      lineHeight: 1.3,
+      letterSpacing: 0,
+    },
     body1: {
       fontFamily: openSans,
       fontWeight: 400,
