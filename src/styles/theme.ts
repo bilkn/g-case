@@ -3,6 +3,30 @@ import { createTheme } from "@mui/material";
 const openSans = `'Open Sans', sans-serif`;
 
 export const theme = createTheme({
+  components: {
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,
+        },
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          textTransform: "capitalize",
+        },
+      },
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
+  },
   typography: {
     htmlFontSize: 10,
     fontFamily: openSans,

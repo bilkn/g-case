@@ -8,7 +8,6 @@ export const GlobalStyles = createGlobalStyle`
 } 
 html, 
 body {  
-        background: #fff;
         font-size: 62.5%;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
@@ -56,5 +55,9 @@ input::-webkit-inner-spin-button {
 }
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.MuiButton-endIcon.MuiButton-endIcon  {
+    margin-right: 0px;
 }
 `;
