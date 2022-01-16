@@ -8,8 +8,7 @@ export const StyledTextField = styled(TextField)`
     border-width: 2px;
   }
 
-  && .MuiInputBase-root fieldset:hover,
-  && .MuiInputBase-root fieldset:focus {
+  && .Mui-focused fieldset {
     border-color: ${({ theme }) => theme.palette.primary.main};
   }
 `;

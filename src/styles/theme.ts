@@ -3,8 +3,14 @@ import { createTheme } from "@mui/material";
 const openSans = `'Open Sans', sans-serif`;
 
 export const theme = createTheme({
-
   components: {
+    MuiFormControlLabel: {
+      styleOverrides: {
+        root: {
+          marginLeft: 0,
+        },
+      },
+    },
   },
   typography: {
     htmlFontSize: 10,

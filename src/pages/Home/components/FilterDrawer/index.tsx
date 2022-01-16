@@ -1,12 +1,37 @@
-import { Box, Button, Drawer, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Drawer,
+  FormControlLabel,
+  FormGroup,
+  InputLabel,
+  List,
+  ListItem,
+  Stack,
+} from "@mui/material";
 import React, { MouseEventHandler } from "react";
 import { FilterBase } from "..";
-import { FilterContent } from "../..";
+import { CustomCheckbox, CustomTextField } from "../../../../components";
 
 interface FilterDrawerProps {
   onClose: MouseEventHandler;
   open: boolean;
 }
+
+const BrandControls = () => {
+  return (
+    <Stack>
+      <Box>
+        <InputLabel />
+        <CustomTextField />
+      </Box>
+      <FormGroup>
+        <CustomCheckbox label="All" extra='(56)' />
+      </FormGroup>
+    </Stack>
+  );
+};
 
 function FilterDrawer(props: FilterDrawerProps) {
   const { open, onClose } = props;
@@ -14,7 +39,7 @@ function FilterDrawer(props: FilterDrawerProps) {
   return (
     <Drawer
       anchor="bottom"
-      open={open}
+      open={true}
       PaperProps={{
         sx: {
           borderTopLeftRadius: "8px",
@@ -38,7 +63,7 @@ function FilterDrawer(props: FilterDrawerProps) {
       </Box>
       <Stack sx={{ minHeight: "80vh" }}>
         <FilterBase title="Sorting">
-          <FilterContent />
+          <BrandControls />
         </FilterBase>
       </Stack>
     </Drawer>
