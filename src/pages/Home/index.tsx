@@ -1,14 +1,30 @@
-import { Stack } from "@mui/material";
+import { Box, Button, Drawer, InputLabel, Stack } from "@mui/material";
 import React from "react";
-import { MainLayout } from "../../components";
+import { CustomTextField, MainLayout } from "../../components";
 import { FilterBase } from "./components";
+import FilterDrawer from "./components/FilterDrawer";
+import useHomeLogic from "./useHomeLogic";
+
+export const FilterContent = () => {
+  return (
+    <Stack>
+      <Box>
+        <InputLabel />
+        <CustomTextField />
+      </Box>
+    </Stack>
+  );
+};
 
 function Home() {
+  const { states, handlers } = useHomeLogic();
+  const { showFilter } = states;
+  const { toggleFilter } = handlers;
+
   return (
     <MainLayout>
-      <Stack>
-        <FilterBase title="Sorting">sdf</FilterBase>
-      </Stack>
+      <FilterDrawer open={showFilter} onClose={toggleFilter} />
+
       {/*     <section>
       </section> */}
     </MainLayout>

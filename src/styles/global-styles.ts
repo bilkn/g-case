@@ -57,4 +57,8 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+.MuiButton-endIcon.MuiButton-endIcon  {
+    margin-right: 0px;
+}
 `;

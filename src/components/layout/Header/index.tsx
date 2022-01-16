@@ -6,6 +6,12 @@ import { ShoppingBagIcon } from "../../icons";
 
 function Header() {
   const theme = useTheme();
+
+  const shoppingBagIconStyle = {
+    color: theme.palette.common.white,
+    fontSize: "1.4rem",
+  };
+
   return (
     <StyledHeader>
       <Box
@@ -20,11 +26,14 @@ function Header() {
             <img src={Logo} alt="Market" />
           </Link>
         </LogoContainer>
-        <IconButton
-          sx={{ color: theme.palette.common.white, fontSize: "1.4rem" }}
-        >
+        <Box display={{ xs: "block", md: "none" }}>
+          <IconButton sx={shoppingBagIconStyle}>
+            <ShoppingBagIcon />
+          </IconButton>
+        </Box>
+        <Box display={{ xs: "none", md: "block" }} sx={shoppingBagIconStyle}>
           <ShoppingBagIcon />
-        </IconButton>
+        </Box>
       </Box>
     </StyledHeader>
   );
