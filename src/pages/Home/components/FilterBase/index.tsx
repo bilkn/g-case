@@ -9,6 +9,7 @@ interface FilterBaseProps extends CommonProps {
   mobile?: boolean;
   titleContainerProps?: BoxProps;
   containerProps?: BoxProps;
+  contentContainerProps?: BoxProps;
 }
 
 function FilterBase(props: FilterBaseProps) {
@@ -17,6 +18,7 @@ function FilterBase(props: FilterBaseProps) {
     title,
     containerProps,
     titleContainerProps,
+    contentContainerProps,
     mobile = true,
   } = props;
   const [showChildren, setShowChildren] = useState(!mobile);
@@ -66,7 +68,14 @@ function FilterBase(props: FilterBaseProps) {
             </Typography>
           )}
         </TitleContainer>
-        {showChildren && <ContentContainer>{children}</ContentContainer>}
+        {showChildren && (
+          <ContentContainer
+            padding={{ xs: "24px 16px" }}
+            {...contentContainerProps}
+          >
+            {children}
+          </ContentContainer>
+        )}
       </Box>
     </aside>
   );

@@ -1,15 +1,21 @@
-import { Box, Checkbox, FormControlLabel, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  FormControlLabel,
+  FormControlLabelProps,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { theme } from "../../../styles/theme";
 import { CheckedIcon } from "../../icons";
 
 interface CustomCheckboxProps {
-  label: string;
-  extra?: string;
+  label?: string;
+  extraText?: string;
 }
 
 function CustomCheckbox(props: CustomCheckboxProps) {
-  const { label, extra } = props;
+  const { label, extraText } = props;
   const CustomLabel = () => (
     <Typography
       color="text.secondary"
@@ -17,9 +23,9 @@ function CustomCheckbox(props: CustomCheckboxProps) {
       sx={{ marginLeft: "8px" }}
     >
       {label}{" "}
-      {extra && (
+      {extraText && (
         <Typography color={theme.palette.grey[300]} component={"span"}>
-          {extra}
+          {extraText}
         </Typography>
       )}
     </Typography>
