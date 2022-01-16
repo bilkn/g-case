@@ -69,10 +69,7 @@ function FilterBase(props: FilterBaseProps) {
           )}
         </TitleContainer>
         {showChildren && (
-          <ContentContainer
-            padding={{ xs: "24px 16px" }}
-            {...contentContainerProps}
-          >
+          <ContentContainer {...contentContainerProps}>
             {children}
           </ContentContainer>
         )}

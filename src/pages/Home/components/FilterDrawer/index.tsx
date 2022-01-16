@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  Checkbox,
-  Divider,
-  Drawer,
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  Stack,
-} from "@mui/material";
+import { Box, Button, Drawer, FormGroup, Stack } from "@mui/material";
 import React, { MouseEventHandler } from "react";
 import { FilterBase } from "..";
 import {
@@ -65,14 +55,45 @@ const sorting = [
   },
 ];
 
+const tags = [
+  {
+    label: "All",
+    value: "All",
+    count: "18",
+  },
+  {
+    label: "Beach",
+    value: "Beach",
+    count: "5",
+  },
+  {
+    label: "People",
+    value: "People",
+    count: "18",
+  },
+  {
+    label: "Bicyle",
+    value: "Bicyle",
+    count: "1",
+  },
+];
+
 const BrandControls = () => {
   return (
-    <Stack spacing={"17px"}>
-      <Box>
+    <Stack>
+      <Box
+        padding={{ xs: "16px", md: "18px 21px 17px 27px" }}
+        paddingBottom={{ xs: "0", md: "0" }}
+      >
         <CustomTextField placeholder="Search brand" />
       </Box>
       <FormGroup>
-        <Stack spacing={"18px"}>
+        <Stack
+          spacing={"18px"}
+          height={{ md: "142px" }}
+          padding={{ xs: "16px", md: "16px 21px 30px 27px" }}
+          sx={{ overflowY: "auto" }}
+        >
           {mockBrands.map(({ label, count }) => (
             <CustomCheckbox label={label} extraText={`(${count})`} />
           ))}
@@ -85,12 +106,37 @@ const BrandControls = () => {
 const SortingControls = () => {
   return (
     <FormGroup>
-      <Stack spacing={"18px"}>
+      <Stack spacing={"18px"} padding={{ xs: "16px", md: "24px" }}>
         {sorting.map(({ label }) => (
           <CustomRadio label={label} />
         ))}
       </Stack>
     </FormGroup>
+  );
+};
+
+const TagControls = () => {
+  return (
+    <Stack>
+      <Box
+        padding={{ xs: "16px", md: "24px" }}
+        paddingBottom={{ xs: "0", md: "0" }}
+      >
+        <CustomTextField placeholder="Search brand" />
+      </Box>
+      <FormGroup>
+        <Stack
+          spacing={"18px"}
+          height={{ md: "142px" }}
+          sx={{ overflowY: "auto" }}
+          padding={{ xs: "16px", md: "24px" }}
+        >
+          {tags.map(({ label, count }) => (
+            <CustomCheckbox label={label} extraText={`(${count})`} />
+          ))}
+        </Stack>
+      </FormGroup>
+    </Stack>
   );
 };
 
@@ -127,13 +173,11 @@ function FilterDrawer(props: FilterDrawerProps) {
         <FilterBase title="Sorting">
           <SortingControls />
         </FilterBase>
-        <FilterBase
-          title="Branding"
-          contentContainerProps={{
-            padding: { xs: "24px 16px", md: "18px 21px 30px 27px" },
-          }}
-        >
+        <FilterBase title="Brands">
           <BrandControls />
+        </FilterBase>
+        <FilterBase title="Tags">
+          <TagControls />
         </FilterBase>
       </Stack>
     </Drawer>
