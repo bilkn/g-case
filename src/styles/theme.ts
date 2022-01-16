@@ -11,6 +11,14 @@ export const theme = createTheme({
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          boxShadow: "none",
+          textTransform: "capitalize",
+        },
+      },
+    },
   },
   typography: {
     htmlFontSize: 10,

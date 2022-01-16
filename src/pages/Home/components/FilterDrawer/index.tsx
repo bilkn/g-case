@@ -146,7 +146,7 @@ function FilterDrawer(props: FilterDrawerProps) {
   return (
     <Drawer
       anchor="bottom"
-      open={true}
+      open={open}
       PaperProps={{
         sx: {
           borderTopLeftRadius: "8px",
