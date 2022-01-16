@@ -19,6 +19,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
+      },
+    },
   },
   typography: {
     htmlFontSize: 10,
