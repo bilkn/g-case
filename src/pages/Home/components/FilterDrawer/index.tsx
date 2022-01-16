@@ -6,8 +6,6 @@ import {
   FormControlLabel,
   FormGroup,
   InputLabel,
-  List,
-  ListItem,
   Stack,
 } from "@mui/material";
 import React, { MouseEventHandler } from "react";
@@ -19,15 +17,37 @@ interface FilterDrawerProps {
   open: boolean;
 }
 
+const mockBrands = [
+  {
+    label: "All",
+    count: "18",
+  },
+  {
+    label: "Konopelski Group",
+    count: "5",
+  },
+  {
+    label: "Rice Inc",
+    count: "18",
+  },
+  {
+    label: "Feil, Dooley and Reinger",
+    count: "1",
+  },
+];
+
 const BrandControls = () => {
   return (
-    <Stack>
+    <Stack spacing={"17px"}>
       <Box>
-        <InputLabel />
-        <CustomTextField />
+        <CustomTextField placeholder="Search brand"  />
       </Box>
       <FormGroup>
-        <CustomCheckbox label="All" extra='(56)' />
+        <Stack spacing={"18px"}>
+          {mockBrands.map(({ label, count }) => (
+            <CustomCheckbox label={label} extra={`(${count})`} />
+          ))}
+        </Stack>
       </FormGroup>
     </Stack>
   );
