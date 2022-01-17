@@ -19,25 +19,33 @@ function Header() {
   return (
     <>
       <StyledHeader>
-        <Box
-          sx={{
-            alignItems: "center",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <LogoContainer>
-            <Link to={"/"}>
-              <img src={Logo} alt="Market" />
-            </Link>
-          </LogoContainer>
-          <Box display={{ xs: "block", md: "none" }}>
-            <IconButton sx={shoppingBagIconStyle} onClick={toggleCartDrawer}>
+        <Box sx={{ display: "flex" }}>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              justifyContent: "space-between",
+              margin: "0 auto",
+              maxWidth: "1232px",
+              width: "100%",
+            }}
+          >
+            <LogoContainer>
+              <Link to={"/"}>
+                <img src={Logo} alt="Market" />
+              </Link>
+            </LogoContainer>
+            <Box display={{ xs: "block", lg: "none" }}>
+              <IconButton sx={shoppingBagIconStyle} onClick={toggleCartDrawer}>
+                <ShoppingBagIcon />
+              </IconButton>
+            </Box>
+            <Box
+              display={{ xs: "none", lg: "block" }}
+              sx={shoppingBagIconStyle}
+            >
               <ShoppingBagIcon />
-            </IconButton>
-          </Box>
-          <Box display={{ xs: "none", md: "block" }} sx={shoppingBagIconStyle}>
-            <ShoppingBagIcon />
+            </Box>
           </Box>
         </Box>
       </StyledHeader>

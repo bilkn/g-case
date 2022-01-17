@@ -72,7 +72,10 @@ function MiddleColumn(props: MiddleColumnProps) {
                 sx={{ display: "flex", justifyContent: "space-between" }}
                 paddingBottom={"16px"}
               >
-                <Box sx={{ display: "flex" }} width={{ xs: "80%", md: "100%" }}>
+                <Box
+                  sx={{ display: "flex", overflowX: "auto" }}
+                  width={{ xs: "80%", md: "100%" }}
+                >
                   <Stack direction={"row"} spacing={"8px"}>
                     <CustomChip
                       active

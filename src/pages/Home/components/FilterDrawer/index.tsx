@@ -22,6 +22,7 @@ function FilterDrawer(props: FilterDrawerProps) {
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
           paddingTop: "10px",
+          paddingBottom: "20px",
         },
       }}
     >
