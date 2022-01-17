@@ -17,8 +17,18 @@ function Home() {
   return (
     <>
       <MainLayout>
-        <Box>
-          <Grid container spacing={{ xs: "0", lg: "16px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Grid
+            container
+            spacing={{ xs: "0", lg: "16px" }}
+            sx={{ maxWidth: "1232px" }}
+          >
             <Grid item xs={12} lg={3}>
               <Box display={{ xs: "none", lg: "block" }}>
                 <Box>
