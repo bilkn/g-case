@@ -52,18 +52,14 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  console.log(matches);
-
   const { toggleFilter } = props;
+
   return (
     <>
       <Box>
         <section>
           <Box>
-            <Typography
-              variant="h1"
-              color={theme.palette.grey[500]}
-            >
+            <Typography variant="h1" color={theme.palette.grey[500]}>
               Products
             </Typography>
             <aside>
@@ -81,7 +77,7 @@ function MiddleColumn(props: MiddleColumnProps) {
                     <CustomChip onClick={() => "do something"} label="shirt" />
                   </Stack>
                 </Box>
-                <Box display={{ xs: "block", lg: "none" }}>
+                <Box display={{ xs: "block", lg: "none", padding: "16px 0" }}>
                   <Button variant="outlined" onClick={toggleFilter}>
                     Filters
                   </Button>
@@ -92,12 +88,12 @@ function MiddleColumn(props: MiddleColumnProps) {
           <Grid
             container
             sx={{
-              backgroundColor: "#fff",
+              backgroundColor: { lg: "#fff" },
               borderRadius: "2px",
-              padding: "12px 8px",
+              padding: { xs: "0", lg: "12px 8px" },
             }}
           >
-            {createMockItems(30).map(({ price, name }) => (
+            {createMockItems(30).map(({ price, name }, i) => (
               <Grid
                 item
                 xs={12}
@@ -105,6 +101,11 @@ function MiddleColumn(props: MiddleColumnProps) {
                 md={4}
                 lg={3}
                 padding={{ xs: "16px", lg: "10px 12px" }}
+                sx={{
+                  backgroundColor: { xs: "#fff", lg: "none" },
+                  borderRadius: { xs: "12px", sm: "0" },
+                  marginTop: { xs: i !== 0 ? "20px" : "0", sm: "0" },
+                }}
               >
                 <ProductCard price={price} name={name} />
               </Grid>
