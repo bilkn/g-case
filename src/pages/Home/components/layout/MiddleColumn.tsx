@@ -4,7 +4,6 @@ import {
   Grid,
   Icon,
   Pagination,
-  PaginationItem,
   Stack,
   Typography,
 } from "@mui/material";
@@ -15,7 +14,7 @@ import { createMockItems } from "../../../../mocks/createMockItems";
 import { theme } from "../../../../styles/theme";
 import { CustomPaginationItem } from "../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { CustomChip } from "../../../../components";
+import { CustomChip, Footer } from "../../../../components";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
@@ -57,66 +56,73 @@ function MiddleColumn(props: MiddleColumnProps) {
 
   const { toggleFilter } = props;
   return (
-    <section>
-      <Box>
-        <Typography
-          variant="h1"
-          color={theme.palette.grey[500]}
-          sx={{ marginBottom: "16px" }}
-        >
-          Products
-        </Typography>
-        <aside>
-          <Box
-            sx={{ display: "flex", justifyContent: "space-between" }}
-            paddingBottom={"16px"}
+    <>
+      <section>
+        <Box>
+          <Typography
+            variant="h1"
+            color={theme.palette.grey[500]}
+            sx={{ marginBottom: "16px" }}
           >
-            <Box sx={{ display: "flex" }} width={{ xs: "80%", md: "100%" }}>
-              <Stack direction={"row"} spacing={"8px"}>
-                <CustomChip active onClick={() => "do something"} label="mug" />
-                <CustomChip onClick={() => "do something"} label="shirt" />
-              </Stack>
+            Products
+          </Typography>
+          <aside>
+            <Box
+              sx={{ display: "flex", justifyContent: "space-between" }}
+              paddingBottom={"16px"}
+            >
+              <Box sx={{ display: "flex" }} width={{ xs: "80%", md: "100%" }}>
+                <Stack direction={"row"} spacing={"8px"}>
+                  <CustomChip
+                    active
+                    onClick={() => "do something"}
+                    label="mug"
+                  />
+                  <CustomChip onClick={() => "do something"} label="shirt" />
+                </Stack>
+              </Box>
+              <Box display={{ xs: "block", md: "none" }}>
+                <Button variant="outlined" onClick={toggleFilter}>
+                  Filters
+                </Button>
+              </Box>
             </Box>
-            <Box display={{ xs: "block", md: "none" }}>
-              <Button variant="outlined" onClick={toggleFilter}>
-                Filters
-              </Button>
+          </aside>
+        </Box>
+        <Grid
+          container
+          columnSpacing={{ xs: "16px", md: "24px" }}
+          rowSpacing={{ xs: "16px", md: "22px" }}
+        >
+          {createMockItems(30).map(({ price, name }) => (
+            <Grid item xs={6} md={4} lg={3}>
+              <ProductCard price={price} name={name} />
+            </Grid>
+          ))}
+        </Grid>
+        <Box sx={{ marginTop: "32px" }}>
+          <aside>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
+              <Pagination
+                count={20}
+                siblingCount={matches ? 2 : 0}
+                renderItem={(item) => (
+                  <CustomPaginationItem
+                    components={{
+                      previous: LeftArrow,
+                      next: RightArrow,
+                    }}
+                    {...item}
+                  />
+                )}
+                sx={{ color: "white" }}
+              />
             </Box>
-          </Box>
-        </aside>
-      </Box>
-      <Grid
-        container
-        columnSpacing={{ xs: "16px", md: "24px" }}
-        rowSpacing={{ xs: "16px", md: "22px" }}
-      >
-        {createMockItems(30).map(({ price, name }) => (
-          <Grid item xs={6} md={4} lg={3}>
-            <ProductCard price={price} name={name} />
-          </Grid>
-        ))}
-      </Grid>
-      <Box sx={{ marginTop: "32px" }}>
-        <aside>
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <Pagination
-              count={20}
-              siblingCount={matches ? 2 : 0}
-              renderItem={(item) => (
-                <CustomPaginationItem
-                  components={{
-                    previous: LeftArrow,
-                    next: RightArrow,
-                  }}
-                  {...item}
-                />
-              )}
-              sx={{ color: "white" }}
-            />
-          </Box>
-        </aside>
-      </Box>
-    </section>
+          </aside>
+        </Box>
+      </section>
+      <Footer />
+    </>
   );
 }
 
