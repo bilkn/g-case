@@ -40,13 +40,13 @@ function FilterDrawer(props: FilterDrawerProps) {
       </Box>
       <CustomDivider />
       <Stack sx={{ height: "80vh", overflowY: "auto" }} spacing={"10px"}>
-        <FilterBase title="Sorting">
+        <FilterBase mobile title="Sorting">
           <SortingControls />
         </FilterBase>
-        <FilterBase title="Brands">
+        <FilterBase mobile title="Brands">
           <BrandControls />
         </FilterBase>
-        <FilterBase title="Tags">
+        <FilterBase mobile title="Tags">
           <TagControls />
         </FilterBase>
       </Stack>

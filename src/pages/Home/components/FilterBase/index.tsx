@@ -19,7 +19,7 @@ function FilterBase(props: FilterBaseProps) {
     containerProps,
     titleContainerProps,
     contentContainerProps,
-    mobile = true,
+    mobile,
   } = props;
   const [showChildren, setShowChildren] = useState(!mobile);
   const toggleDropdown = () => setShowChildren(!showChildren);
@@ -28,7 +28,7 @@ function FilterBase(props: FilterBaseProps) {
     <aside>
       <Box {...containerProps}>
         <TitleContainer
-          marginBottom={{ xs: "10px", md: "18px" }}
+          marginBottom={{ xs: "10px", md: "12px" }}
           {...titleContainerProps}
         >
           {mobile ? (
