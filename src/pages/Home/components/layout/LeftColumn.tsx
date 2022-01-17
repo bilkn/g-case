@@ -17,7 +17,7 @@ function LeftColumn() {
         <FilterBase
           title="Brands"
           titleContainerProps={{
-            marginBottom: { xs: "10px", md: "18px" },
+            marginBottom: { xs: "10px", lg: "18px" },
           }}
         >
           <BrandControls />

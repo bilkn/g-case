@@ -12,7 +12,7 @@ export const StyledHeader = styled.header`
 `;
 
 export const LogoContainer = styled.div`
-  @media (min-width: 769px) {
+  @media (min-width: 900px) {
     margin: 0 auto;
   }
 `;

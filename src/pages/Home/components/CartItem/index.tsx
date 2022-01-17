@@ -28,7 +28,7 @@ function CartItem(props: CartItemProps) {
             <Typography
               variant="body2"
               color="primary"
-              fontSize={{ xs: "1.2rem", md: "1.4rem" }}
+              fontSize={{ xs: "1.2rem", lg: "1.4rem" }}
               sx={{ marginTop: "4px" }}
             >
               {price}

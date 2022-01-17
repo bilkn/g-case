@@ -4,7 +4,7 @@ import styled from "styled-components/macro";
 export const TitleContainer = styled(Box)`
   padding: 0 16px;
 
-  @media (min-width: 900px) {
+  @media (min-width: 1200px) {
     padding: 0;
   }
 `;

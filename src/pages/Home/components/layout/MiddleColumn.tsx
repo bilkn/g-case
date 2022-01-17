@@ -26,7 +26,7 @@ const LeftArrow = () => (
       alignItems: "center",
       display: "flex",
     }}
-    marginRight={{ md: "57px" }}
+    marginRight={{ lg: "57px" }}
   >
     <Icon sx={{ alignItems: "center", display: "flex" }}>
       <LeftArrowIcon />
@@ -41,7 +41,7 @@ const RightArrow = () => (
       alignItems: "center",
       display: "flex",
     }}
-    marginLeft={{ md: "57px" }}
+    marginLeft={{ lg: "57px" }}
   >
     <Icon sx={{ alignItems: "center", display: "flex" }}>
       <RightArrowIcon />
@@ -63,18 +63,14 @@ function MiddleColumn(props: MiddleColumnProps) {
             <Typography
               variant="h1"
               color={theme.palette.grey[500]}
-              sx={{ marginBottom: "16px" }}
             >
               Products
             </Typography>
             <aside>
-              <Box
-                sx={{ display: "flex", justifyContent: "space-between" }}
-                paddingBottom={"16px"}
-              >
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Box
-                  sx={{ display: "flex", overflowX: "auto" }}
-                  width={{ xs: "80%", md: "100%" }}
+                  sx={{ display: "flex", overflowX: "auto", padding: "16px 0" }}
+                  width={{ xs: "80%", lg: "100%" }}
                 >
                   <Stack direction={"row"} spacing={"8px"}>
                     <CustomChip
@@ -85,7 +81,7 @@ function MiddleColumn(props: MiddleColumnProps) {
                     <CustomChip onClick={() => "do something"} label="shirt" />
                   </Stack>
                 </Box>
-                <Box display={{ xs: "block", md: "none" }}>
+                <Box display={{ xs: "block", lg: "none" }}>
                   <Button variant="outlined" onClick={toggleFilter}>
                     Filters
                   </Button>
@@ -95,9 +91,6 @@ function MiddleColumn(props: MiddleColumnProps) {
           </Box>
           <Grid
             container
-            /*     columnSpacing={{ xs: "16px", md: "24px" }}
-            rowSpacing={{ xs: "16px", md: "22px" }} */
-
             sx={{
               backgroundColor: "#fff",
               borderRadius: "2px",

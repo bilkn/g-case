@@ -28,7 +28,7 @@ function FilterBase(props: FilterBaseProps) {
     <aside>
       <Box {...containerProps}>
         <TitleContainer
-          marginBottom={{ xs: "10px", md: "12px" }}
+          marginBottom={{ xs: "10px", lg: "12px" }}
           {...titleContainerProps}
         >
           {mobile ? (

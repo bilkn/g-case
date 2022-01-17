@@ -26,7 +26,7 @@ function Header() {
               display: "flex",
               justifyContent: "space-between",
               margin: "0 auto",
-              maxWidth: "1232px",
+              maxWidth: "1222px",
               width: "100%",
             }}
           >

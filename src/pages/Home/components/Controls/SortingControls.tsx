@@ -24,7 +24,7 @@ const sorting = [
 function SortingControls() {
   return (
     <FormGroup>
-      <Stack spacing={"18px"} padding={{ xs: "16px", md: "24px" }}>
+      <Stack spacing={"18px"} padding={{ xs: "16px", lg: "24px" }}>
         {sorting.map(({ label }) => (
           <CustomRadio label={label} />
         ))}
