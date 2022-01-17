@@ -5,6 +5,7 @@ import {
   Icon,
   Pagination,
   PaginationItem,
+  Stack,
   Typography,
 } from "@mui/material";
 import React, { MouseEventHandler, useState } from "react";
@@ -14,6 +15,7 @@ import { createMockItems } from "../../../../mocks/createMockItems";
 import { theme } from "../../../../styles/theme";
 import { CustomPaginationItem } from "../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { CustomChip } from "../../../../components";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
@@ -64,20 +66,24 @@ function MiddleColumn(props: MiddleColumnProps) {
         >
           Products
         </Typography>
-        <Box
-          sx={{ display: "flex", justifyContent: "space-between" }}
-          paddingBottom={"16px"}
-        >
-          <Box sx={{ display: "flex" }} width={{ xs: "80%", md: "100%" }}>
-            <Button variant="contained">Test 1</Button>{" "}
-            <Button variant="contained">Test 2</Button>
+        <aside>
+          <Box
+            sx={{ display: "flex", justifyContent: "space-between" }}
+            paddingBottom={"16px"}
+          >
+            <Box sx={{ display: "flex" }} width={{ xs: "80%", md: "100%" }}>
+              <Stack direction={"row"} spacing={"8px"}>
+                <CustomChip active onClick={() => "do something"} label="mug" />
+                <CustomChip onClick={() => "do something"} label="shirt" />
+              </Stack>
+            </Box>
+            <Box display={{ xs: "block", md: "none" }}>
+              <Button variant="outlined" onClick={toggleFilter}>
+                Filters
+              </Button>
+            </Box>
           </Box>
-          <Box display={{ xs: "block", md: "none" }}>
-            <Button variant="outlined" onClick={toggleFilter}>
-              Filters
-            </Button>
-          </Box>
-        </Box>
+        </aside>
       </Box>
       <Grid
         container

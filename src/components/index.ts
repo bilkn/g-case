@@ -8,6 +8,7 @@ export { default as MainLayout } from "./layout/MainLayout";
 export { default as CustomTextField } from "./form-controls/CustomTextField";
 export { default as CustomCheckbox } from "./form-controls/CustomCheckbox";
 export { default as CustomRadio } from "./form-controls/CustomRadio";
+export { default as CustomChip } from "./form-controls/CustomChip";
 
 /* UTILS */
 
