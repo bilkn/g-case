@@ -10,7 +10,7 @@ export const TitleContainer = styled(Box)`
 `;
 
 export const ContentContainer = styled(Box)`
-  background: ${({ theme }) => theme.palette.common.main};
+  background: ${({ theme }) => theme.palette.common.white};
   box-shadow: 0px 6px 24px rgba(93, 62, 188, 0.04);
   border-radius: ${({ theme }) => theme.shape.borderRadius};
   width: 100%;

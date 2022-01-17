@@ -19,6 +19,7 @@ function CartItem(props: CartItemProps) {
           sx={{
             display: "flex",
             justifyContent: "space-between",
+            paddingX: "6px",
             width: "100%",
           }}
         >
