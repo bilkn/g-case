@@ -1,14 +1,58 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Icon,
+  Pagination,
+  PaginationItem,
+  Typography,
+} from "@mui/material";
 import React, { MouseEventHandler, useState } from "react";
 import { ProductCard } from "..";
+import { LeftArrowIcon, RightArrowIcon } from "../../../../components/icons";
 import { createMockItems } from "../../../../mocks/createMockItems";
 import { theme } from "../../../../styles/theme";
+import { CustomPaginationItem } from "../utils";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
 }
 
+const LeftArrow = () => (
+  <Box
+    sx={{
+      alignItems: "center",
+      display: "flex",
+    }}
+    marginRight={{ md: "57px" }}
+  >
+    <Icon sx={{ alignItems: "center", display: "flex" }}>
+      <LeftArrowIcon />
+    </Icon>
+    <Typography variant="body2">Prev</Typography>
+  </Box>
+);
+
+const RightArrow = () => (
+  <Box
+    sx={{
+      alignItems: "center",
+      display: "flex",
+    }}
+    marginLeft={{ md: "57px" }}
+  >
+    <Icon sx={{ alignItems: "center", display: "flex" }}>
+      <RightArrowIcon />
+    </Icon>
+    <Typography variant="body2">Next</Typography>
+  </Box>
+);
+
 function MiddleColumn(props: MiddleColumnProps) {
+  const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
+  console.log(matches);
+
   const { toggleFilter } = props;
   return (
     <section>
@@ -46,6 +90,26 @@ function MiddleColumn(props: MiddleColumnProps) {
           </Grid>
         ))}
       </Grid>
+      <Box sx={{ marginTop: "32px" }}>
+        <aside>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Pagination
+              count={20}
+              siblingCount={matches ? 2 : 0}
+              renderItem={(item) => (
+                <CustomPaginationItem
+                  components={{
+                    previous: LeftArrow,
+                    next: RightArrow,
+                  }}
+                  {...item}
+                />
+              )}
+              sx={{ color: "white" }}
+            />
+          </Box>
+        </aside>
+      </Box>
     </section>
   );
 }
