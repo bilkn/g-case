@@ -8,7 +8,7 @@ import CartDrawer from "../../drawers/CartDrawer";
 
 function Header() {
   const theme = useTheme();
-  const [showCartDrawer, setShowCartDrawer] = useState(true);
+  const [showCartDrawer, setShowCartDrawer] = useState(false);
   const toggleCartDrawer = () => setShowCartDrawer(!showCartDrawer);
 
   const shoppingBagIconStyle = {

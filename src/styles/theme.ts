@@ -26,6 +26,13 @@ export const theme = createTheme({
         },
       },
     },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: '2px',
+        },
+      },
+    },
   },
   typography: {
     htmlFontSize: 10,
