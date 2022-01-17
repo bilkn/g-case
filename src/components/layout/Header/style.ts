@@ -11,4 +11,8 @@ export const StyledHeader = styled.header`
   z-index: 1;
 `;
 
-export const LogoContainer = styled.div``;
+export const LogoContainer = styled.div`
+  @media (min-width: 769px) {
+    margin: 0 auto;
+  }
+`;

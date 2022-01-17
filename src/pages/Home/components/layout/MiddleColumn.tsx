@@ -95,7 +95,7 @@ function MiddleColumn(props: MiddleColumnProps) {
           rowSpacing={{ xs: "16px", md: "22px" }}
         >
           {createMockItems(30).map(({ price, name }) => (
-            <Grid item xs={6} md={4} lg={3}>
+            <Grid item xs={12} sm={6} md={4} lg={3}>
               <ProductCard price={price} name={name} />
             </Grid>
           ))}
@@ -121,7 +121,6 @@ function MiddleColumn(props: MiddleColumnProps) {
           </aside>
         </Box>
       </section>
-      <Footer />
     </>
   );
 }
