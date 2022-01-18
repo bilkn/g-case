@@ -9,10 +9,14 @@ export const StyledHeader = styled.header`
   left: 0;
   width: 100%;
   z-index: 1;
+
+  @media (min-width: 1200px) {
+    padding: 0;
+  }
 `;
 
 export const LogoContainer = styled.div`
-  @media (min-width: 900px) {
+  @media (min-width: 1200px) {
     margin: 0 auto;
   }
 `;
