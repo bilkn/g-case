@@ -53,8 +53,11 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const { products } = useLogic();
+  const { products, handlers } = useLogic();
+  const { handlePageChange } = handlers;
   const { toggleFilter } = props;
+
+  console.log(products, "products");
 
   return (
     <>
@@ -119,6 +122,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
+                  onChange={handlePageChange}
                   count={20}
                   siblingCount={matches ? 2 : 0}
                   renderItem={(item) => (

@@ -1,3 +1,3 @@
-export const actionTypes = {
+export const sagaActions = {
   FETCH_PRODUCTS: "FETCH_PRODUCTS",
 };
