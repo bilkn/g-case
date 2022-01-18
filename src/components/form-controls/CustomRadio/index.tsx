@@ -1,14 +1,23 @@
-import { Box, FormControlLabel, Icon, Radio, Typography } from "@mui/material";
+import {
+  Box,
+  FormControlLabel,
+  FormControlLabelProps,
+  Icon,
+  Radio,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import { theme } from "../../../styles/theme";
 import { CheckedIcon } from "../../icons";
 
 interface CustomRadioProps {
   label: string;
+  name: string;
+  value: string;
 }
 
 function CustomRadio(props: CustomRadioProps) {
-  const { label } = props;
+  const { name, label, value } = props;
 
   const CustomLabel = () => (
     <Typography
@@ -22,7 +31,9 @@ function CustomRadio(props: CustomRadioProps) {
 
   return (
     <FormControlLabel
+      name={name}
       label={<CustomLabel />}
+      value={value}
       control={
         <Radio
           sx={{

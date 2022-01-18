@@ -28,17 +28,17 @@ function TagControls() {
   return (
     <Stack>
       <Box
-        padding={{ xs: "16px", md: "24px" }}
-        paddingBottom={{ xs: "0", md: "0" }}
+        padding={{ xs: "16px", lg: "24px 24px 10px 24px" }}
+        paddingBottom={{ xs: "0" }}
       >
         <CustomTextField placeholder="Search brand" />
       </Box>
-      <FormGroup>
+      <FormGroup sx={{ paddingRight: "24px" }}>
         <Stack
           spacing={"18px"}
-          height={{ md: "142px" }}
-          sx={{ overflowY: "auto" }}
-          padding={{ xs: "16px", md: "24px" }}
+          height={{ lg: "142px" }}
+          sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
+          padding={{ xs: "16px", lg: "7px 0 24px 24px" }}
         >
           {tags.map(({ label, count }) => (
             <CustomCheckbox label={label} extraText={`(${count})`} />

@@ -8,6 +8,7 @@ export const GlobalStyles = createGlobalStyle`
 } 
 html, 
 body {  
+        background-color: #FAFAFA;
         font-size: 62.5%;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
@@ -60,4 +61,16 @@ input[type=number] {
 .MuiButton-endIcon.MuiButton-endIcon  {
     margin-right: 0px;
 }
+
+&::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #E0E0E0;
+    border-radius: 2px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #d3d3d3;
+  }
 `;

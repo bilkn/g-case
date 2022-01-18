@@ -1,4 +1,4 @@
-import { Box, Button, Drawer, List, Stack, Typography } from "@mui/material";
+import { Box, Button, Drawer, List, Stack, Typography, useMediaQuery } from "@mui/material";
 import React, { MouseEventHandler } from "react";
 import { CartItem } from "../../../pages/Home/components";
 import { theme } from "../../../styles/theme";
@@ -11,10 +11,11 @@ interface CartDrawerProps {
 
 function CartDrawer(props: CartDrawerProps) {
   const { open, total, onClose } = props;
+  const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
 
   return (
     <Drawer
-      open={open}
+      open={!matches && open}
       anchor="right"
       PaperProps={{ sx: { padding: "16px", width: "80%" } }}
     >

@@ -29,7 +29,7 @@ export const theme = createTheme({
     MuiPaginationItem: {
       styleOverrides: {
         root: {
-          borderRadius: '2px',
+          borderRadius: "2px",
         },
       },
     },
@@ -103,6 +103,6 @@ export const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: "2px",
+    borderRadius: 2,
   },
 });

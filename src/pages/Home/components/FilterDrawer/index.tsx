@@ -1,7 +1,15 @@
-import { Box, Button, Drawer, FormGroup, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Drawer,
+  FormGroup,
+  Stack,
+  useMediaQuery,
+} from "@mui/material";
 import React, { MouseEventHandler } from "react";
 import { FilterBase } from "..";
 import { CustomDivider } from "../../../../components";
+import { theme } from "../../../../styles/theme";
 import BrandControls from "../Controls/BrandControls";
 import SortingControls from "../Controls/SortingControls";
 import TagControls from "../Controls/TagControls";
@@ -12,16 +20,18 @@ interface FilterDrawerProps {
 
 function FilterDrawer(props: FilterDrawerProps) {
   const { open, onClose } = props;
+  const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
 
   return (
     <Drawer
       anchor="bottom"
-      open={open}
+      open={!matches && open}
       PaperProps={{
         sx: {
           borderTopLeftRadius: "8px",
           borderTopRightRadius: "8px",
           paddingTop: "10px",
+          paddingBottom: "20px",
         },
       }}
     >

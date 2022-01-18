@@ -29,17 +29,17 @@ function BrandControls() {
   return (
     <Stack>
       <Box
-        padding={{ xs: "16px", md: "18px 21px 17px 27px" }}
-        paddingBottom={{ xs: "0", md: "0" }}
+        padding={{ xs: "16px", lg: "18px 21px 17px 27px" }}
+        paddingBottom={{ xs: "0", lg: "10px" }}
       >
         <CustomTextField placeholder="Search brand" />
       </Box>
-      <FormGroup>
+      <FormGroup sx={{ paddingRight: "21px" }}>
         <Stack
           spacing={"18px"}
-          height={{ md: "142px" }}
-          padding={{ xs: "16px", md: "16px 21px 30px 27px" }}
-          sx={{ overflowY: "auto" }}
+          height={{ lg: "142px" }}
+          padding={{ xs: "16px", lg: "7px 0 30px 27px" }}
+          sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
         >
           {mockBrands.map(({ label, count }) => (
             <CustomCheckbox label={label} extraText={`(${count})`} />
