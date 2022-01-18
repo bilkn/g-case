@@ -1,5 +1,5 @@
-import { FormGroup, Stack } from "@mui/material";
-import React from "react";
+import { FormControl, FormGroup, RadioGroup, Stack } from "@mui/material";
+import { Form, Formik } from "formik";
 import { CustomRadio } from "../../../../components";
 
 const sorting = [
@@ -22,13 +22,37 @@ const sorting = [
 ];
 
 function SortingControls() {
+  const handleSubmit = (value: { orderBy: string }) =>
+    console.log("value", value);
+
   return (
     <FormGroup>
-      <Stack spacing={"18px"} padding={{ xs: "16px", lg: "24px" }}>
-        {sorting.map(({ label }) => (
-          <CustomRadio label={label} />
-        ))}
-      </Stack>
+      <Formik
+        initialValues={{
+          orderBy: "lowToHigh",
+        }}
+        onSubmit={handleSubmit}
+      >
+        {({ handleChange }) => (
+          <Form>
+            <FormControl>
+              <RadioGroup
+                onChange={(e) => {
+                  const { value } = e.target;
+                  handleChange(e);
+                  handleSubmit({ orderBy: value });
+                }}
+              >
+                <Stack spacing={"18px"} padding={{ xs: "16px", lg: "24px" }}>
+                  {sorting.map(({ label, value }) => (
+                    <CustomRadio name="orderBy" label={label} value={value} />
+                  ))}
+                </Stack>
+              </RadioGroup>
+            </FormControl>
+          </Form>
+        )}
+      </Formik>
     </FormGroup>
   );
 }
