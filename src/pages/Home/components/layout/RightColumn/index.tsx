@@ -1,5 +1,5 @@
 import React from "react";
-import { Cart } from "..";
+import { Cart } from "../..";
 
 function RightColumn() {
   return <Cart total={200} />;

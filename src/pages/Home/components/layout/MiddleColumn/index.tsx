@@ -7,14 +7,15 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { MouseEventHandler, useState } from "react";
-import { ProductCard } from "..";
-import { LeftArrowIcon, RightArrowIcon } from "../../../../components/icons";
-import { createMockItems } from "../../../../mocks/createMockItems";
-import { theme } from "../../../../styles/theme";
-import { CustomPaginationItem } from "../utils";
+import { MouseEventHandler } from "react";
+import { ProductCard } from "../../";
+import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
+import { createMockItems } from "../../../../../mocks/createMockItems";
+import { theme } from "../../../../../styles/theme";
+import { CustomPaginationItem } from "../../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { CustomChip, Footer } from "../../../../components";
+import { CustomChip } from "../../../../../components";
+import useLogic from "./useLogic";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
@@ -52,6 +53,7 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
+  const { products } = useLogic();
   const { toggleFilter } = props;
 
   return (
@@ -93,23 +95,25 @@ function MiddleColumn(props: MiddleColumnProps) {
               padding: { xs: "0", lg: "12px 8px" },
             }}
           >
-            {createMockItems(30).map(({ price, name }, i) => (
-              <Grid
-                item
-                xs={12}
-                sm={6}
-                md={4}
-                lg={3}
-                padding={{ xs: "16px", lg: "10px 12px" }}
-                sx={{
-                  backgroundColor: { xs: "#fff", lg: "none" },
-                  borderRadius: { xs: "12px", sm: "0" },
-                  marginTop: { xs: i !== 0 ? "20px" : "0", sm: "0" },
-                }}
-              >
-                <ProductCard price={price} name={name} />
-              </Grid>
-            ))}
+            {products.length
+              ? products.map(({ price, name }, i) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={4}
+                    lg={3}
+                    padding={{ xs: "16px", lg: "10px 12px" }}
+                    sx={{
+                      backgroundColor: { xs: "#fff", lg: "none" },
+                      borderRadius: { xs: "12px", sm: "0" },
+                      marginTop: { xs: i !== 0 ? "20px" : "0", sm: "0" },
+                    }}
+                  >
+                    <ProductCard price={price} name={name} />
+                  </Grid>
+                ))
+              : null}
           </Grid>
           <Box sx={{ marginTop: "32px" }}>
             <aside>

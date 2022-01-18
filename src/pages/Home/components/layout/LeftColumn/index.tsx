@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
 import React from "react";
-import { FilterBase } from "..";
-import BrandControls from "../Controls/BrandControls";
-import SortingControls from "../Controls/SortingControls";
-import TagControls from "../Controls/TagControls";
+import { FilterBase } from "../..";
+import BrandControls from "../../Controls/BrandControls";
+import SortingControls from "../../Controls/SortingControls";
+import TagControls from "../../Controls/TagControls";
 
 function LeftColumn() {
   return (

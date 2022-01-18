@@ -1,5 +1,4 @@
 import { Box, Grid } from "@mui/material";
-import React from "react";
 import { Footer, MainLayout } from "../../components";
 import FilterDrawer from "./components/FilterDrawer";
 import { LeftColumn, MiddleColumn, RightColumn } from "./components/layout";
