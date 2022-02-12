@@ -1,4 +1,4 @@
-# Getir Assignment
+# G. Study Case
 
 ## Documentation
 
