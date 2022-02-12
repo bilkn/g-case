@@ -5,17 +5,20 @@ import {
   FormControlLabelProps,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { theme } from "../../../styles/theme";
 import { CheckedIcon } from "../../icons";
 
 interface CustomCheckboxProps {
+  name: string;
   label?: string;
   extraText?: string;
+  value: string;
+  onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
 }
 
 function CustomCheckbox(props: CustomCheckboxProps) {
-  const { label, extraText } = props;
+  const { label, extraText, name, value, onChange } = props;
   const CustomLabel = () => (
     <Typography
       color="text.secondary"
@@ -33,8 +36,11 @@ function CustomCheckbox(props: CustomCheckboxProps) {
 
   return (
     <FormControlLabel
+      name={name}
+      value={value}
       control={
         <Checkbox
+          onChange={onChange}
           sx={{
             boxShadow: "0px 1px 7px rgba(93, 56, 192, 0.4);",
             border: "none",

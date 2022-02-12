@@ -1,58 +1,50 @@
 import { FormControl, FormGroup, RadioGroup, Stack } from "@mui/material";
-import { Form, Formik } from "formik";
+import { ChangeEvent } from "react";
 import { CustomRadio } from "../../../../components";
 
 const sorting = [
   {
     label: "Price low to high",
-    value: "0",
+    value: "price",
   },
   {
     label: "Price high to low",
-    value: "1",
+    value: "price_desc",
   },
   {
     label: "New to old",
-    value: "2",
+    value: "added",
   },
   {
     label: "Old to new",
-    value: "3",
+    value: "added_desc",
   },
 ];
 
-function SortingControls() {
-  const handleSubmit = (value: { orderBy: string }) =>
-    console.log("value", value);
+interface SortingControlsProps {
+  onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
+  value: string;
+}
+
+function SortingControls(props: SortingControlsProps) {
+  const { onChange, value } = props;
 
   return (
     <FormGroup>
-      <Formik
-        initialValues={{
-          orderBy: "lowToHigh",
-        }}
-        onSubmit={handleSubmit}
-      >
-        {({ handleChange }) => (
-          <Form>
-            <FormControl>
-              <RadioGroup
-                onChange={(e) => {
-                  const { value } = e.target;
-                  handleChange(e);
-                  handleSubmit({ orderBy: value });
-                }}
-              >
-                <Stack spacing={"18px"} padding={{ xs: "16px", lg: "24px" }}>
-                  {sorting.map(({ label, value }) => (
-                    <CustomRadio name="orderBy" label={label} value={value} />
-                  ))}
-                </Stack>
-              </RadioGroup>
-            </FormControl>
-          </Form>
-        )}
-      </Formik>
+      <FormControl>
+        <RadioGroup value={value} onChange={onChange}>
+          <Stack spacing={"18px"} padding={{ xs: "16px", lg: "24px" }}>
+            {sorting.map(({ label, value }) => (
+              <CustomRadio
+                key={value}
+                name="_sort"
+                label={label}
+                value={value}
+              />
+            ))}
+          </Stack>
+        </RadioGroup>
+      </FormControl>
     </FormGroup>
   );
 }

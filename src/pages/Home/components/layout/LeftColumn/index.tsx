@@ -1,16 +1,30 @@
 import { Box } from "@mui/material";
-import React from "react";
 import { FilterBase } from "../..";
+import { BrandType } from "../../../../../types/brandType";
+import { FilterType } from "../../../../../types/filterType";
 import BrandControls from "../../Controls/BrandControls";
 import SortingControls from "../../Controls/SortingControls";
 import TagControls from "../../Controls/TagControls";
 
-function LeftColumn() {
+interface LeftColumnProps extends FilterType {
+  brands: BrandType[] | [];
+}
+
+function LeftColumn(props: LeftColumnProps) {
+  const {
+    onSortingChange,
+    onBrandChange,
+    onTagChange,
+    filterValues,
+    brands: brandLabels,
+  } = props;
+  const { _sort, brands, tags } = filterValues;
+
   return (
     <>
       <Box>
         <FilterBase title="Sorting">
-          <SortingControls />
+          <SortingControls value={_sort} onChange={onSortingChange} />
         </FilterBase>
       </Box>
       <Box marginTop={"24px"}>
@@ -20,12 +34,16 @@ function LeftColumn() {
             marginBottom: { xs: "10px", lg: "18px" },
           }}
         >
-          <BrandControls />
+          <BrandControls
+            values={brands}
+            brands={brandLabels}
+            onChange={onBrandChange}
+          />
         </FilterBase>
       </Box>
       <Box marginTop={"18px"}>
         <FilterBase title="Tags">
-          <TagControls />
+          <TagControls values={tags} onChange={onTagChange} />
         </FilterBase>
       </Box>
     </>

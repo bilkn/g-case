@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { productReducer } from "./reducers";
+import { cartReducer, productReducer } from "./reducers";
 import createSagaMiddleware from "redux-saga";
 import sagas from "../sagas";
 
@@ -8,9 +8,9 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     product: productReducer,
+    cart: cartReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: [sagaMiddleware],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

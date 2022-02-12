@@ -1,4 +1,5 @@
 import { Box, FormGroup, Stack } from "@mui/material";
+import { ChangeEvent } from "react";
 import { CustomCheckbox, CustomTextField } from "../../../../components";
 
 const tags = [
@@ -18,13 +19,20 @@ const tags = [
     count: "18",
   },
   {
-    label: "Bicyle",
-    value: "Bicyle",
+    label: "Bicycle",
+    value: "Bicycle",
     count: "1",
   },
 ];
 
-function TagControls() {
+interface TagControlsProps {
+  onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  values: string[] | string;
+}
+
+function TagControls(props: TagControlsProps) {
+  const { onChange } = props;
+
   return (
     <Stack>
       <Box
@@ -40,8 +48,14 @@ function TagControls() {
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
           padding={{ xs: "16px", lg: "7px 0 24px 24px" }}
         >
-          {tags.map(({ label, count }) => (
-            <CustomCheckbox label={label} extraText={`(${count})`} />
+          {tags.map(({ label, count, value }) => (
+            <CustomCheckbox
+              name="tags"
+              label={label}
+              extraText={`(${count})`}
+              onChange={onChange}
+              value={value}
+            />
           ))}
         </Stack>
       </FormGroup>

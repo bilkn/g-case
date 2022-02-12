@@ -1,17 +1,20 @@
-import { Box, IconButton, List, ListItem, Typography } from "@mui/material";
+import { Box, IconButton, ListItem, Typography } from "@mui/material";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { CustomDivider } from "../../../../components";
 import { MinusSignIcon, PlusSignIcon } from "../../../../components/icons";
+import {
+  calculateTotal,
+  decreaseItemCount,
+  increaseItemCount,
+} from "../../../../redux/reducers/cartSlice";
 import { theme } from "../../../../styles/theme";
+import { CartItemType } from "../../../../types/cartItemType";
 
-interface CartItemProps {
-  name: string;
-  price: string;
-  itemCount: string;
-}
+function CartItem(props: CartItemType) {
+  const { id, name, price, count } = props;
+  const dispatch = useDispatch();
 
-function CartItem(props: CartItemProps) {
-  const { name, price, itemCount } = props;
   return (
     <>
       <ListItem>
@@ -31,7 +34,7 @@ function CartItem(props: CartItemProps) {
               fontSize={{ xs: "1.2rem", lg: "1.4rem" }}
               sx={{ marginTop: "4px" }}
             >
-              {price}
+              ₺{price}
             </Typography>
           </Box>
           <Box
@@ -41,7 +44,14 @@ function CartItem(props: CartItemProps) {
               height: "37px",
             }}
           >
-            <IconButton sx={{ color: "inherit", width: "32px" }} disableRipple>
+            <IconButton
+              sx={{ color: "inherit", width: "32px" }}
+              disableRipple
+              onClick={() => {
+                dispatch(decreaseItemCount(id));
+                dispatch(calculateTotal());
+              }}
+            >
               <MinusSignIcon />
             </IconButton>
             <Box
@@ -61,10 +71,17 @@ function CartItem(props: CartItemProps) {
                   lineHeight: "20.43px",
                 }}
               >
-                {itemCount}
+                {count}
               </Typography>
             </Box>
-            <IconButton sx={{ color: "inherit", width: "32px" }} disableRipple>
+            <IconButton
+              sx={{ color: "inherit", width: "32px" }}
+              disableRipple
+              onClick={() => {
+                dispatch(increaseItemCount(id));
+                dispatch(calculateTotal());
+              }}
+            >
               <PlusSignIcon />
             </IconButton>
           </Box>

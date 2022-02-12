@@ -5,9 +5,11 @@ import { LeftColumn, MiddleColumn, RightColumn } from "./components/layout";
 import useHomeLogic from "./useHomeLogic";
 
 function Home() {
-  const { states, handlers } = useHomeLogic();
+  const { states, handlers, formikValues } = useHomeLogic();
   const { showFilter } = states;
-  const { toggleFilter } = handlers;
+  const { toggleFilter, handlePageChange, handleFormikChange } = handlers;
+  const { _sort, tags, brands } = formikValues;
+  const filterValues = { _sort, tags, brands };
 
   return (
     <>
@@ -25,10 +27,19 @@ function Home() {
             sx={{ maxWidth: "1248px" }}
           >
             <Grid item xs={12} lg={3} display={{ xs: "none", lg: "block" }}>
-              <LeftColumn />
+              <LeftColumn
+                filterValues={filterValues}
+                onBrandChange={handleFormikChange}
+                onSortingChange={handleFormikChange}
+                onTagChange={handleFormikChange}
+                brands={states.brands}
+              />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <MiddleColumn toggleFilter={toggleFilter} />
+              <MiddleColumn
+                onPageChange={handlePageChange}
+                toggleFilter={toggleFilter}
+              />
             </Grid>
             <Grid item xs={12} lg={3} display={{ xs: "none", lg: "block" }}>
               <RightColumn />
@@ -37,7 +48,14 @@ function Home() {
         </Box>
       </MainLayout>
       <Footer />
-      <FilterDrawer open={showFilter} onClose={toggleFilter} />
+      <FilterDrawer
+        filterValues={filterValues}
+        open={showFilter}
+        onClose={toggleFilter}
+        onBrandChange={handleFormikChange}
+        onSortingChange={handleFormikChange}
+        onTagChange={handleFormikChange}
+      />
     </>
   );
 }

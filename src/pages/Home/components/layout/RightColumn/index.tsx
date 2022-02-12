@@ -1,8 +1,10 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import { Cart } from "../..";
+import { RootState } from "../../../../../redux/store";
 
 function RightColumn() {
-  return <Cart total={200} />;
+  const total = useSelector((state: RootState) => state.cart.total);
+  return <Cart total={total} />;
 }
 
 export default RightColumn;

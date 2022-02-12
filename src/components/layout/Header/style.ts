@@ -16,7 +16,8 @@ export const StyledHeader = styled.header`
 `;
 
 export const LogoContainer = styled.div`
-  @media (min-width: 1200px) {
-    margin: 0 auto;
-  }
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;

@@ -7,18 +7,19 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { MouseEventHandler } from "react";
+import { ChangeEvent, MouseEventHandler } from "react";
 import { ProductCard } from "../../";
 import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
-import { createMockItems } from "../../../../../mocks/createMockItems";
 import { theme } from "../../../../../styles/theme";
 import { CustomPaginationItem } from "../../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { CustomChip } from "../../../../../components";
-import useLogic from "./useLogic";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../redux/store";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
+  onPageChange: (event: ChangeEvent<any>, page: number) => void;
 }
 
 const LeftArrow = () => (
@@ -53,11 +54,8 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const { products, handlers } = useLogic();
-  const { handlePageChange } = handlers;
-  const { toggleFilter } = props;
-
-  console.log(products, "products");
+  const products = useSelector((state: RootState) => state.product);
+  const { toggleFilter, onPageChange } = props;
 
   return (
     <>
@@ -99,7 +97,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             }}
           >
             {products.length
-              ? products.map(({ price, name }, i) => (
+              ? products.map((product, i) => (
                   <Grid
                     item
                     xs={12}
@@ -113,7 +111,7 @@ function MiddleColumn(props: MiddleColumnProps) {
                       marginTop: { xs: i !== 0 ? "20px" : "0", sm: "0" },
                     }}
                   >
-                    <ProductCard price={price} name={name} />
+                    <ProductCard product={product} />
                   </Grid>
                 ))
               : null}
@@ -122,7 +120,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
-                  onChange={handlePageChange}
+                  onChange={onPageChange}
                   count={20}
                   siblingCount={matches ? 2 : 0}
                   renderItem={(item) => (

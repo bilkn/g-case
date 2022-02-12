@@ -5,17 +5,14 @@ import { Link } from "react-router-dom";
 import { ShoppingBagIcon } from "../../icons";
 import { useState } from "react";
 import CartDrawer from "../../drawers/CartDrawer";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../redux/store";
 
-interface HeaderProps {
-  totalPrice?: string | number;
-}
-
-function Header(props: HeaderProps) {
+function Header() {
   const theme = useTheme();
   const [showCartDrawer, setShowCartDrawer] = useState(false);
   const toggleCartDrawer = () => setShowCartDrawer(!showCartDrawer);
-  const { totalPrice = `39,97` } = props;
-
+  const total = useSelector((state: RootState) => state.cart.total);
   const shoppingBagIconStyle = {
     color: theme.palette.common.white,
     fontSize: "1.4rem",
@@ -29,9 +26,10 @@ function Header(props: HeaderProps) {
             sx={{
               alignItems: "center",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               margin: "0 auto",
               maxWidth: "1222px",
+              position: "relative",
               width: "100%",
             }}
           >
@@ -57,7 +55,7 @@ function Header(props: HeaderProps) {
             >
               <ShoppingBagIcon />
               <Typography variant="body2" sx={{ marginLeft: "8px" }}>
-                ₺{totalPrice}
+                ₺ {total}
               </Typography>
             </Box>
           </Box>
@@ -66,7 +64,7 @@ function Header(props: HeaderProps) {
       <CartDrawer
         onClose={toggleCartDrawer}
         open={showCartDrawer}
-        total={"200"}
+        total={total}
       />
     </>
   );
