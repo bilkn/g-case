@@ -59,7 +59,7 @@ function Cart(props: CartProps) {
           </Box>
         </>
       ) : (
-        <Typography>Cart is empty</Typography>
+        <Typography>Your cart is empty.</Typography>
       )}
     </Box>
   );

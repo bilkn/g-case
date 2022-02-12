@@ -1,10 +1,19 @@
 import { FormikProps, useFormik } from "formik";
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  EventHandler,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import API from "../../api";
 import { getProducts } from "../../redux/reducers/productSlice";
 import { useQuery } from "react-query";
+import { RootState } from "../../redux/store";
+import { calculateTotalPage } from "../../helpers";
 
 interface FormikType {
   _page: string;
@@ -20,6 +29,7 @@ function useHomeLogic() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(false);
+  const { totalItemCount } = useSelector((state: RootState) => state.product);
   const {
     values: formikValues,
     handleChange: handleFormikChange,
@@ -43,6 +53,19 @@ function useHomeLogic() {
 
   const handlePageChange = (e: ChangeEvent, page: number) => {
     setFormikFieldValue("_page", page);
+  };
+
+  const totalPage = useMemo(
+    () => calculateTotalPage(totalItemCount),
+    [totalItemCount]
+  );
+
+  const handleItemTypeClick = (e: any) => {
+    const { textContent: itemType } = e.target;
+    if (formikValues.itemType === itemType) {
+      return setFormikFieldValue("itemType", "");
+    }
+    setFormikFieldValue("itemType", itemType);
   };
 
   const { data: { data: brands } = {} } = useQuery("brands", API.fetchBrands, {
@@ -75,6 +98,12 @@ function useHomeLogic() {
     dispatch(getProducts(searchParams));
   }, [dispatch, formikValues]);
 
+  useEffect(() => {
+    console.log();
+    if (+formikValues._page > totalPage) {
+      setTimeout(() => setFormikFieldValue("_page", "1"), 100);
+    }
+  }, [totalPage, formikValues._page, setFormikFieldValue]);
   /* 
   useEffect(() => {
     navigate({
@@ -87,6 +116,7 @@ function useHomeLogic() {
     toggleFilter,
     handleFormikChange,
     handlePageChange,
+    handleItemTypeClick,
   };
 
   const states = {

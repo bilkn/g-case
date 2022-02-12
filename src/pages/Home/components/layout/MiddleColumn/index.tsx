@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, MouseEventHandler } from "react";
+import { ChangeEvent, MouseEventHandler, useMemo } from "react";
 import { ProductCard } from "../../";
 import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
 import { theme } from "../../../../../styles/theme";
@@ -17,10 +17,14 @@ import { CustomChip, Loader } from "../../../../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store";
 import { ProductType } from "../../../../../types/productType";
+import { calculateTotalPage } from "../../../../../helpers";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
   onPageChange: (event: ChangeEvent<any>, page: number) => void;
+  onItemTypeClick: MouseEventHandler<HTMLDivElement>;
+  currentPage: string | number;
+  itemType: string;
 }
 
 const LeftArrow = () => (
@@ -60,9 +64,13 @@ function MiddleColumn(props: MiddleColumnProps) {
     totalItemCount,
     loading,
   } = useSelector((state: RootState) => state.product);
-  const { toggleFilter, onPageChange } = props;
+  const { toggleFilter, onPageChange, onItemTypeClick, currentPage, itemType } =
+    props;
 
-  const totalPage = Math.ceil(totalItemCount / 16);
+  const totalPage = useMemo(
+    () => calculateTotalPage(totalItemCount),
+    [totalItemCount]
+  );
 
   return (
     <>
@@ -80,11 +88,15 @@ function MiddleColumn(props: MiddleColumnProps) {
                 >
                   <Stack direction={"row"} spacing={"8px"}>
                     <CustomChip
-                      active
-                      onClick={() => "do something"}
+                      active={itemType === "mug"}
+                      onClick={onItemTypeClick}
                       label="mug"
                     />
-                    <CustomChip onClick={() => "do something"} label="shirt" />
+                    <CustomChip
+                      active={itemType === "shirt"}
+                      onClick={onItemTypeClick}
+                      label="shirt"
+                    />
                   </Stack>
                 </Box>
                 <Box display={{ xs: "block", lg: "none", padding: "16px 0" }}>
@@ -144,6 +156,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
+                  page={+currentPage}
                   onChange={onPageChange}
                   count={totalPage}
                   siblingCount={matches ? 2 : 0}

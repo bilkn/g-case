@@ -75,7 +75,7 @@ function CartDrawer(props: CartDrawerProps) {
           </Box>
         </>
       ) : (
-        <Typography>Cart is empty</Typography>
+        <Typography>Your cart is empty.</Typography>
       )}
     </Drawer>
   );
