@@ -13,7 +13,7 @@ import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
 import { theme } from "../../../../../styles/theme";
 import { CustomPaginationItem } from "../../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { CustomChip } from "../../../../../components";
+import { CustomChip, Loader } from "../../../../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store";
 import { ProductType } from "../../../../../types/productType";
@@ -55,9 +55,11 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const { list: products, totalItemCount } = useSelector(
-    (state: RootState) => state.product
-  );
+  const {
+    list: products,
+    totalItemCount,
+    loading,
+  } = useSelector((state: RootState) => state.product);
   const { toggleFilter, onPageChange } = props;
 
   const totalPage = Math.ceil(totalItemCount / 16);
@@ -93,17 +95,30 @@ function MiddleColumn(props: MiddleColumnProps) {
               </Box>
             </aside>
           </Box>
-          <Grid
-            container
-            sx={{
-              backgroundColor: { lg: "#fff" },
-              borderRadius: "2px",
-              padding: { xs: "0", lg: "12px 8px" },
-            }}
-          >
-            {products.length
-              ? products.map((product: ProductType, i: number) => (
+          {loading && !products.length ? (
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                minHeight: "60vh",
+              }}
+            >
+              <Loader />
+            </Box>
+          ) : (
+            <Grid
+              container
+              sx={{
+                backgroundColor: { lg: "#fff" },
+                borderRadius: "2px",
+                padding: { xs: "0", lg: "12px 8px" },
+              }}
+            >
+              {products.length ? (
+                products.map((product: ProductType, i: number) => (
                   <Grid
+                    key={product.slug}
                     item
                     xs={12}
                     sm={6}
@@ -119,8 +134,12 @@ function MiddleColumn(props: MiddleColumnProps) {
                     <ProductCard product={product} />
                   </Grid>
                 ))
-              : null}
-          </Grid>
+              ) : (
+                <Typography>No product is found.</Typography>
+              )}
+            </Grid>
+          )}
+
           <Box sx={{ marginTop: "32px" }}>
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>

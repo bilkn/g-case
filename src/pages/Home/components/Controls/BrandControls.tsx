@@ -41,6 +41,7 @@ function BrandControls(props: BrandControlsProps) {
               />
               {brands.map(({ name, slug }, i: number) => (
                 <CustomCheckbox
+                  key={slug}
                   name="brands"
                   label={name}
                   onChange={onChange}

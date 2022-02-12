@@ -52,6 +52,7 @@ function TagControls(props: TagControlsProps) {
         >
           {tags.map(({ label, value }, i: number) => (
             <CustomCheckbox
+              key={value}
               name="tags"
               label={label}
               extraText={label === "All" ? `(${totalItemCount})` : ""}

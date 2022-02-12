@@ -53,7 +53,7 @@ function CartDrawer(props: CartDrawerProps) {
           >
             <Stack spacing={"18px"}>
               {items.map((item) => (
-                <CartItem {...item} />
+                <CartItem key={item.slug} {...item} />
               ))}
             </Stack>
           </List>

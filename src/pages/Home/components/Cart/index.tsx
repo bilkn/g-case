@@ -37,7 +37,7 @@ function Cart(props: CartProps) {
           >
             <Stack spacing={"18px"}>
               {items.map((item) => (
-                <CartItem {...item} />
+                <CartItem key={item.slug} {...item} />
               ))}
             </Stack>
           </List>
