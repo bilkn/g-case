@@ -1,5 +1,7 @@
 # G. Study Case
 
+Greetings.
+
 ## Documentation
 
 ### Libraries Used
