@@ -1,5 +1,5 @@
 import { Box, FormGroup, Stack } from "@mui/material";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CustomCheckbox, CustomTextField } from "../../../../components";
 import { RootState } from "../../../../redux/store";
@@ -33,7 +33,29 @@ interface TagControlsProps {
 
 function TagControls(props: TagControlsProps) {
   const { onChange } = props;
+  const [displayedTag, setDisplayedTags] = useState(tags);
+  const [search, setSearch] = useState("");
   const { totalItemCount } = useSelector((state: RootState) => state.product);
+
+  const filterTagsBySearchQuery = useCallback(
+    (value) =>
+      setDisplayedTags(
+        tags.filter((tag) =>
+          tag.label.toLowerCase().includes(value.toLowerCase())
+        )
+      ),
+    []
+  );
+
+  const handleSearchBoxChange = (e: any) => {
+    const { value } = e.target;
+    setSearch(value);
+    filterTagsBySearchQuery(value);
+  };
+
+  useEffect(() => {
+    filterTagsBySearchQuery(search);
+  }, [filterTagsBySearchQuery, search]);
 
   return (
     <Stack>
@@ -41,7 +63,11 @@ function TagControls(props: TagControlsProps) {
         padding={{ xs: "16px", lg: "24px 24px 10px 24px" }}
         paddingBottom={{ xs: "0" }}
       >
-        <CustomTextField placeholder="Search tag" />
+        <CustomTextField
+          placeholder="Search tag"
+          onChange={handleSearchBoxChange}
+          value={search}
+        />
       </Box>
       <FormGroup defaultChecked sx={{ paddingRight: "24px" }}>
         <Stack
@@ -50,7 +76,7 @@ function TagControls(props: TagControlsProps) {
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
           padding={{ xs: "16px", lg: "7px 0 24px 24px" }}
         >
-          {tags.map(({ label, value }, i: number) => (
+          {displayedTag.map(({ label, value }, i: number) => (
             <CustomCheckbox
               key={value}
               name="tags"

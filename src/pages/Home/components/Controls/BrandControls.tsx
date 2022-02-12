@@ -1,7 +1,17 @@
 import { Box, FormGroup, Stack } from "@mui/material";
-import React, { ChangeEvent, FormEventHandler } from "react";
+import React, {
+  ChangeEvent,
+  FormEventHandler,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useSelector } from "react-redux";
-import { CustomCheckbox, CustomTextField } from "../../../../components";
+import {
+  CustomCheckbox,
+  CustomTextField,
+  Loader,
+} from "../../../../components";
 import { RootState } from "../../../../redux/store";
 import { BrandType } from "../../../../types/brandType";
 
@@ -12,7 +22,29 @@ interface BrandControlsProps {
 
 function BrandControls(props: BrandControlsProps) {
   const { onChange, brands = [] } = props;
+  const [displayedBrands, setDisplayedBrands] = useState(brands);
+  const [search, setSearch] = useState("");
   const { totalItemCount } = useSelector((state: RootState) => state.product);
+
+  const filterBrandsBySearchQuery = useCallback(
+    (value) =>
+      setDisplayedBrands(
+        brands.filter((brand) =>
+          brand.name.toLowerCase().includes(value.toLowerCase())
+        )
+      ),
+    [brands]
+  );
+
+  const handleSearchBoxChange = (e: any) => {
+    const { value } = e.target;
+    setSearch(value);
+    filterBrandsBySearchQuery(value);
+  };
+
+  useEffect(() => {
+    filterBrandsBySearchQuery(search);
+  }, [brands, filterBrandsBySearchQuery, search]);
 
   return (
     <Stack>
@@ -20,7 +52,11 @@ function BrandControls(props: BrandControlsProps) {
         padding={{ xs: "16px", lg: "18px 21px 17px 27px" }}
         paddingBottom={{ xs: "0", lg: "10px" }}
       >
-        <CustomTextField placeholder="Search brand" />
+        <CustomTextField
+          value={search}
+          placeholder="Search brand"
+          onChange={handleSearchBoxChange}
+        />
       </Box>
       <FormGroup sx={{ paddingRight: "21px" }}>
         <Stack
@@ -39,7 +75,7 @@ function BrandControls(props: BrandControlsProps) {
                 value={""}
                 defaultChecked
               />
-              {brands.map(({ name, slug }, i: number) => (
+              {displayedBrands.map(({ name, slug }, i: number) => (
                 <CustomCheckbox
                   key={slug}
                   name="brands"
@@ -50,7 +86,11 @@ function BrandControls(props: BrandControlsProps) {
               ))}
             </>
           ) : (
-            "Loading"
+            <Box sx={{ display: "flex", minHeight: "40px" }}>
+              <Box sx={{ m: "auto" }}>
+                <Loader height={40} width={40} />
+              </Box>
+            </Box>
           )}
         </Stack>
       </FormGroup>
