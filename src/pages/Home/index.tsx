@@ -7,8 +7,13 @@ import useHomeLogic from "./useHomeLogic";
 function Home() {
   const { states, handlers, formikValues } = useHomeLogic();
   const { showFilter } = states;
-  const { toggleFilter, handlePageChange, handleFormikChange } = handlers;
-  const { _sort, tags, brands } = formikValues;
+  const {
+    toggleFilter,
+    handlePageChange,
+    handleFormikChange,
+    handleItemTypeClick,
+  } = handlers;
+  const { _sort, tags, brands, _page,itemType } = formikValues;
   const filterValues = { _sort, tags, brands };
 
   return (
@@ -38,7 +43,10 @@ function Home() {
             <Grid item xs={12} lg={6}>
               <MiddleColumn
                 onPageChange={handlePageChange}
+                onItemTypeClick={handleItemTypeClick}
                 toggleFilter={toggleFilter}
+                currentPage={_page}
+                itemType={itemType}
               />
             </Grid>
             <Grid item xs={12} lg={3} display={{ xs: "none", lg: "block" }}>

@@ -7,19 +7,24 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { ChangeEvent, MouseEventHandler } from "react";
+import { ChangeEvent, MouseEventHandler, useMemo } from "react";
 import { ProductCard } from "../../";
 import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
 import { theme } from "../../../../../styles/theme";
 import { CustomPaginationItem } from "../../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { CustomChip } from "../../../../../components";
+import { CustomChip, Loader } from "../../../../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store";
+import { ProductType } from "../../../../../types/productType";
+import { calculateTotalPage } from "../../../../../helpers";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
   onPageChange: (event: ChangeEvent<any>, page: number) => void;
+  onItemTypeClick: MouseEventHandler<HTMLDivElement>;
+  currentPage: string | number;
+  itemType: string;
 }
 
 const LeftArrow = () => (
@@ -54,8 +59,18 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const products = useSelector((state: RootState) => state.product);
-  const { toggleFilter, onPageChange } = props;
+  const {
+    list: products,
+    totalItemCount,
+    loading,
+  } = useSelector((state: RootState) => state.product);
+  const { toggleFilter, onPageChange, onItemTypeClick, currentPage, itemType } =
+    props;
+
+  const totalPage = useMemo(
+    () => calculateTotalPage(totalItemCount),
+    [totalItemCount]
+  );
 
   return (
     <>
@@ -73,11 +88,15 @@ function MiddleColumn(props: MiddleColumnProps) {
                 >
                   <Stack direction={"row"} spacing={"8px"}>
                     <CustomChip
-                      active
-                      onClick={() => "do something"}
+                      active={itemType === "mug"}
+                      onClick={onItemTypeClick}
                       label="mug"
                     />
-                    <CustomChip onClick={() => "do something"} label="shirt" />
+                    <CustomChip
+                      active={itemType === "shirt"}
+                      onClick={onItemTypeClick}
+                      label="shirt"
+                    />
                   </Stack>
                 </Box>
                 <Box display={{ xs: "block", lg: "none", padding: "16px 0" }}>
@@ -88,17 +107,30 @@ function MiddleColumn(props: MiddleColumnProps) {
               </Box>
             </aside>
           </Box>
-          <Grid
-            container
-            sx={{
-              backgroundColor: { lg: "#fff" },
-              borderRadius: "2px",
-              padding: { xs: "0", lg: "12px 8px" },
-            }}
-          >
-            {products.length
-              ? products.map((product, i) => (
+          {loading && !products.length ? (
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                minHeight: "60vh",
+              }}
+            >
+              <Loader />
+            </Box>
+          ) : (
+            <Grid
+              container
+              sx={{
+                backgroundColor: { lg: "#fff" },
+                borderRadius: "2px",
+                padding: { xs: "0", lg: "12px 8px" },
+              }}
+            >
+              {products.length ? (
+                products.map((product: ProductType, i: number) => (
                   <Grid
+                    key={product.slug}
                     item
                     xs={12}
                     sm={6}
@@ -114,14 +146,19 @@ function MiddleColumn(props: MiddleColumnProps) {
                     <ProductCard product={product} />
                   </Grid>
                 ))
-              : null}
-          </Grid>
+              ) : (
+                <Typography>No product is found.</Typography>
+              )}
+            </Grid>
+          )}
+
           <Box sx={{ marginTop: "32px" }}>
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
+                  page={+currentPage}
                   onChange={onPageChange}
-                  count={20}
+                  count={totalPage}
                   siblingCount={matches ? 2 : 0}
                   renderItem={(item) => (
                     <CustomPaginationItem

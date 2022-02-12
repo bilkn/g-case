@@ -61,7 +61,7 @@ function FilterDrawer(props: FilterDrawerProps) {
           <BrandControls />
         </FilterBase> */}
         <FilterBase mobile title="Tags">
-          <TagControls values={tags} onChange={onBrandChange} />
+          <TagControls  onChange={onBrandChange} />
         </FilterBase>
       </Stack>
     </Drawer>

@@ -53,7 +53,7 @@ function CartDrawer(props: CartDrawerProps) {
           >
             <Stack spacing={"18px"}>
               {items.map((item) => (
-                <CartItem {...item} />
+                <CartItem key={item.slug} {...item} />
               ))}
             </Stack>
           </List>
@@ -75,7 +75,7 @@ function CartDrawer(props: CartDrawerProps) {
           </Box>
         </>
       ) : (
-        <Typography>Cart is empty</Typography>
+        <Typography>Your cart is empty.</Typography>
       )}
     </Drawer>
   );

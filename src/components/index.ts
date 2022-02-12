@@ -1,4 +1,5 @@
 export { default as CustomLink } from "./custom-link";
+export { default as Loader } from "./loader";
 
 /* LAYOUT */
 

@@ -15,10 +15,11 @@ interface CustomCheckboxProps {
   extraText?: string;
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  defaultChecked?: boolean | undefined;
 }
 
 function CustomCheckbox(props: CustomCheckboxProps) {
-  const { label, extraText, name, value, onChange } = props;
+  const { label, extraText, name, value, onChange, defaultChecked } = props;
   const CustomLabel = () => (
     <Typography
       color="text.secondary"
@@ -50,6 +51,7 @@ function CustomCheckbox(props: CustomCheckboxProps) {
             overflow: "hidden",
             width: "22px",
           }}
+          defaultChecked={defaultChecked}
           icon={<></>}
           checkedIcon={
             <Box

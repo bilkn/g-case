@@ -13,12 +13,12 @@ interface ProductCardProps {
 function ProductCard(props: ProductCardProps) {
   const dispatch = useDispatch();
   const { product } = props;
-  const { added: id, name, price } = product;
+  const { slug, name, price } = product;
   const { items } = useSelector((state: RootState) => state.cart);
 
   const isItemAlreadyInCart = useMemo(
-    () => items.some((item) => item.id === id),
-    [id, items]
+    () => items.some((item) => item.slug === slug),
+    [items, slug]
   );
 
   return (
@@ -58,7 +58,7 @@ function ProductCard(props: ProductCardProps) {
             fullWidth
             sx={{ boxShadow: "none", marginTop: "auto" }}
             onClick={() => {
-              dispatch(addItem({ id, ...product }));
+              dispatch(addItem({ ...product }));
               dispatch(calculateTotal());
             }}
           >
