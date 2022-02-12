@@ -7,7 +7,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { MouseEventHandler } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import { ProductCard } from "../../";
 import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
 import { createMockItems } from "../../../../../mocks/createMockItems";
@@ -19,6 +19,10 @@ import useLogic from "./useLogic";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
+  paginationState: (
+    | { _page: string; _limit: string }
+    | Dispatch<SetStateAction<{ _page: string; _limit: string }>>
+  )[];
 }
 
 const LeftArrow = () => (
@@ -53,11 +57,10 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const { products, handlers } = useLogic();
+  const { toggleFilter, paginationState } = props;
+  const [_, setPaginationQuery] = paginationState;
+  const { products, handlers } = useLogic({ setPaginationQuery });
   const { handlePageChange } = handlers;
-  const { toggleFilter } = props;
-
-  console.log(products, "products");
 
   return (
     <>

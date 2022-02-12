@@ -5,7 +5,9 @@ import { getProducts, setProducts } from "./redux/reducers/productSlice";
 
 function* handleGetProducts(action: any): any {
   try {
-    const products = yield call(API.fetchProducts, action.payload.query);
+    const products = yield call(API.fetchProducts, action.payload);
+    console.log({ products });
+
     yield put(setProducts(products));
   } catch (e) {
     yield put({
@@ -15,8 +17,8 @@ function* handleGetProducts(action: any): any {
   }
 }
 
-function* mySaga() {
+function* watcherProductSaga() {
   yield takeEvery(getProducts.type, handleGetProducts);
 }
 
-export default mySaga;
+export default watcherProductSaga;

@@ -9,8 +9,7 @@ export const store = configureStore({
   reducer: {
     product: productReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: [sagaMiddleware],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

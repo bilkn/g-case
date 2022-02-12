@@ -5,7 +5,7 @@ import { LeftColumn, MiddleColumn, RightColumn } from "./components/layout";
 import useHomeLogic from "./useHomeLogic";
 
 function Home() {
-  const { states, handlers } = useHomeLogic();
+  const { states, handlers, paginationState } = useHomeLogic();
   const { showFilter } = states;
   const { toggleFilter } = handlers;
 
@@ -28,7 +28,10 @@ function Home() {
               <LeftColumn />
             </Grid>
             <Grid item xs={12} lg={6}>
-              <MiddleColumn toggleFilter={toggleFilter} />
+              <MiddleColumn
+                paginationState={paginationState}
+                toggleFilter={toggleFilter}
+              />
             </Grid>
             <Grid item xs={12} lg={3} display={{ xs: "none", lg: "block" }}>
               <RightColumn />
