@@ -102,7 +102,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             }}
           >
             {products.length
-              ? products.map(({ price, name }, i) => (
+              ? products.map((product, i) => (
                   <Grid
                     item
                     xs={12}
@@ -116,7 +116,7 @@ function MiddleColumn(props: MiddleColumnProps) {
                       marginTop: { xs: i !== 0 ? "20px" : "0", sm: "0" },
                     }}
                   >
-                    <ProductCard price={price} name={name} />
+                    <ProductCard product={product} />
                   </Grid>
                 ))
               : null}

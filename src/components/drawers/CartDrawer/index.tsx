@@ -1,6 +1,16 @@
-import { Box, Button, Drawer, List, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Drawer,
+  List,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { MouseEventHandler } from "react";
+import { useSelector } from "react-redux";
 import { CartItem } from "../../../pages/Home/components";
+import { RootState } from "../../../redux/store";
 import { theme } from "../../../styles/theme";
 
 interface CartDrawerProps {
@@ -12,6 +22,7 @@ interface CartDrawerProps {
 function CartDrawer(props: CartDrawerProps) {
   const { open, total, onClose } = props;
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
+  const { items } = useSelector((state: RootState) => state.cart);
 
   return (
     <Drawer
@@ -32,10 +43,9 @@ function CartDrawer(props: CartDrawerProps) {
       </Box>
       <List sx={{ padding: "16px 0" }}>
         <Stack spacing={"18px"}>
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
+          {items.map((item) => (
+            <CartItem {...item} />
+          ))}
         </Stack>
       </List>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>

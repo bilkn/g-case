@@ -3,15 +3,11 @@ import React from "react";
 import { CustomDivider } from "../../../../components";
 import { MinusSignIcon, PlusSignIcon } from "../../../../components/icons";
 import { theme } from "../../../../styles/theme";
+import { CartItemType } from "../../../../types/cartItemType";
 
-interface CartItemProps {
-  name: string;
-  price: string;
-  itemCount: string;
-}
-
-function CartItem(props: CartItemProps) {
-  const { name, price, itemCount } = props;
+function CartItem(props: CartItemType) {
+  const { id, name, price, count } = props;
+  
   return (
     <>
       <ListItem>
@@ -61,7 +57,7 @@ function CartItem(props: CartItemProps) {
                   lineHeight: "20.43px",
                 }}
               >
-                {itemCount}
+                {count}
               </Typography>
             </Box>
             <IconButton sx={{ color: "inherit", width: "32px" }} disableRipple>

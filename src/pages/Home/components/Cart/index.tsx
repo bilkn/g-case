@@ -1,6 +1,8 @@
 import { Box, List, Stack, Typography } from "@mui/material";
 import React from "react";
+import { useSelector } from "react-redux";
 import { CartItem } from "..";
+import { RootState } from "../../../../redux/store";
 import { theme } from "../../../../styles/theme";
 
 interface CartProps {
@@ -9,6 +11,7 @@ interface CartProps {
 
 function Cart(props: CartProps) {
   const { total } = props;
+  const { items } = useSelector((state: RootState) => state.cart);
 
   return (
     <Box
@@ -23,10 +26,9 @@ function Cart(props: CartProps) {
     >
       <List sx={{ padding: "16px 0" }}>
         <Stack spacing={"18px"}>
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
-          <CartItem name="Example Product" price="14,99" itemCount="1" />
+          {items.map((item) => (
+            <CartItem {...item} />
+          ))}
         </Stack>
       </List>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
