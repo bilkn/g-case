@@ -13,6 +13,7 @@ body {
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
         -webkit-overflow-scrolling: touch;
+        overflow-y: scroll;
     }
    
     li {
