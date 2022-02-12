@@ -29,7 +29,10 @@ function Home() {
             <Grid item xs={12} lg={3} display={{ xs: "none", lg: "block" }}>
               <LeftColumn
                 filterValues={filterValues}
-                onChange={handleFormikChange}
+                onBrandChange={handleFormikChange}
+                onSortingChange={handleFormikChange}
+                onTagChange={handleFormikChange}
+                brands={states.brands}
               />
             </Grid>
             <Grid item xs={12} lg={6}>
@@ -49,7 +52,9 @@ function Home() {
         filterValues={filterValues}
         open={showFilter}
         onClose={toggleFilter}
-        onChange={handleFormikChange}
+        onBrandChange={handleFormikChange}
+        onSortingChange={handleFormikChange}
+        onTagChange={handleFormikChange}
       />
     </>
   );

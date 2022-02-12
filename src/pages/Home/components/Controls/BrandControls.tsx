@@ -1,31 +1,17 @@
 import { Box, FormGroup, Stack } from "@mui/material";
-import React from "react";
+import React, { ChangeEvent, FormEventHandler } from "react";
 import { CustomCheckbox, CustomTextField } from "../../../../components";
+import { BrandType } from "../../../../types/brandType";
 
-const mockBrands = [
-  {
-    label: "All",
-    value: "All",
-    count: "18",
-  },
-  {
-    label: "Konopelski Group",
-    value: "Konopelski Group",
-    count: "5",
-  },
-  {
-    label: "Rice Inc",
-    value: "Rice Inc",
-    count: "18",
-  },
-  {
-    label: "Feil, Dooley and Reinger",
-    value: "Feil, Dooley and Reinger",
-    count: "1",
-  },
-];
+interface BrandControlsProps {
+  onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
+  values: string[] | [];
+  brands: BrandType[];
+}
 
-function BrandControls() {
+function BrandControls(props: BrandControlsProps) {
+  const { onChange, brands = [] } = props;
+
   return (
     <Stack>
       <Box
@@ -41,9 +27,16 @@ function BrandControls() {
           padding={{ xs: "16px", lg: "7px 0 30px 27px" }}
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
         >
-          {mockBrands.map(({ label, count }) => (
-            <CustomCheckbox label={label} extraText={`(${count})`} />
-          ))}
+          {brands.length
+            ? brands.map(({ name, slug }) => (
+                <CustomCheckbox
+                  name="brands"
+                  label={name}
+                  onChange={onChange}
+                  value={slug}
+                />
+              ))
+            : "Loading"}
         </Stack>
       </FormGroup>
     </Stack>

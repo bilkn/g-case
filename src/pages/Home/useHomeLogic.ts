@@ -2,7 +2,9 @@ import { FormikProps, useFormik } from "formik";
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import API from "../../api";
 import { getProducts } from "../../redux/reducers/productSlice";
+import { useQuery } from "react-query";
 
 interface FormikType {
   _page: string;
@@ -15,6 +17,8 @@ interface FormikType {
 }
 
 function useHomeLogic() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(false);
   const {
     values: formikValues,
@@ -35,11 +39,15 @@ function useHomeLogic() {
     },
   });
 
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
   const toggleFilter = () => setShowFilter(!showFilter);
+
+  const handlePageChange = (e: ChangeEvent, page: number) => {
+    setFormikFieldValue("_page", page);
+  };
+
+  const { data: { data: brands } = {} } = useQuery("brands", API.fetchBrands, {
+    retry: false,
+  });
 
   useEffect(() => {
     const { brands, tags, _sort } = formikValues;
@@ -56,16 +64,14 @@ function useHomeLogic() {
     }
 
     if (brands.length) {
-      brands.forEach((brand) => searchParams.append("brand", brand));
+      brands.forEach((brand) => searchParams.append("manufacturer", brand));
     }
     if (tags.length) {
-      tags.forEach((tag) => searchParams.append("tag", tag));
+      tags.forEach((tag) => searchParams.append("tags", tag));
     }
 
     dispatch(getProducts(searchParams));
   }, [dispatch, formikValues]);
-
-  useEffect(() => {}, [formikValues._sort]);
 
   /* 
   useEffect(() => {
@@ -75,10 +81,6 @@ function useHomeLogic() {
     });
   }, [formikValues, navigate]); */
 
-  const handlePageChange = (e: ChangeEvent, page: number) => {
-    setFormikFieldValue("_page", page);
-  };
-
   const handlers = {
     toggleFilter,
     handleFormikChange,
@@ -87,12 +89,14 @@ function useHomeLogic() {
 
   const states = {
     showFilter,
+    brands: brands || [],
   };
 
   return {
     states,
     handlers,
     formikValues,
+    brands,
   };
 }
 

@@ -10,21 +10,21 @@ import React, { ChangeEvent, MouseEventHandler } from "react";
 import { FilterBase } from "..";
 import { CustomDivider } from "../../../../components";
 import { theme } from "../../../../styles/theme";
+import { FilterType } from "../../../../types/filterType";
 import { FilterValuesType } from "../../../../types/filterValuesType";
 import BrandControls from "../Controls/BrandControls";
 import SortingControls from "../Controls/SortingControls";
 import TagControls from "../Controls/TagControls";
-interface FilterDrawerProps {
+interface FilterDrawerProps extends FilterType {
   onClose: MouseEventHandler;
-  onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
   open: boolean;
   filterValues: FilterValuesType;
 }
 
 function FilterDrawer(props: FilterDrawerProps) {
-  const { open, onClose, onChange, filterValues } = props;
+  const { open, onClose, onBrandChange, onSortingChange, filterValues } = props;
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
-  const { _sort } = filterValues;
+  const { _sort, tags } = filterValues;
 
   return (
     <Drawer
@@ -55,13 +55,13 @@ function FilterDrawer(props: FilterDrawerProps) {
       <CustomDivider />
       <Stack sx={{ height: "80vh", overflowY: "auto" }} spacing={"10px"}>
         <FilterBase mobile title="Sorting">
-          <SortingControls value={_sort} onChange={onChange} />
+          <SortingControls value={_sort} onChange={onSortingChange} />
         </FilterBase>
-        <FilterBase mobile title="Brands">
+        {/*    <FilterBase mobile title="Brands">
           <BrandControls />
-        </FilterBase>
+        </FilterBase> */}
         <FilterBase mobile title="Tags">
-          <TagControls />
+          <TagControls values={tags} onChange={onBrandChange} />
         </FilterBase>
       </Stack>
     </Drawer>
