@@ -13,7 +13,7 @@
 * **Styled Components** - CSS in JS tool
 * **TypeScript** - Strongly typed programming language that builds on JavaScript
 
-### Best Practices Applied
+### Best Practices
 
 * **DRY**
 * **SOLID**
