@@ -6,21 +6,25 @@ import {
   Stack,
   useMediaQuery,
 } from "@mui/material";
-import React, { MouseEventHandler } from "react";
+import React, { ChangeEvent, MouseEventHandler } from "react";
 import { FilterBase } from "..";
 import { CustomDivider } from "../../../../components";
 import { theme } from "../../../../styles/theme";
+import { FilterValuesType } from "../../../../types/filterValuesType";
 import BrandControls from "../Controls/BrandControls";
 import SortingControls from "../Controls/SortingControls";
 import TagControls from "../Controls/TagControls";
 interface FilterDrawerProps {
   onClose: MouseEventHandler;
+  onChange: (event: ChangeEvent<HTMLInputElement>, value: string) => void;
   open: boolean;
+  filterValues: FilterValuesType;
 }
 
 function FilterDrawer(props: FilterDrawerProps) {
-  const { open, onClose } = props;
+  const { open, onClose, onChange, filterValues } = props;
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
+  const { _sort } = filterValues;
 
   return (
     <Drawer
@@ -51,7 +55,7 @@ function FilterDrawer(props: FilterDrawerProps) {
       <CustomDivider />
       <Stack sx={{ height: "80vh", overflowY: "auto" }} spacing={"10px"}>
         <FilterBase mobile title="Sorting">
-          <SortingControls />
+          <SortingControls value={_sort} onChange={onChange} />
         </FilterBase>
         <FilterBase mobile title="Brands">
           <BrandControls />

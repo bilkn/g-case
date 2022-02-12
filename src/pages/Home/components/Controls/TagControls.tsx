@@ -18,8 +18,8 @@ const tags = [
     count: "18",
   },
   {
-    label: "Bicyle",
-    value: "Bicyle",
+    label: "Bicycle",
+    value: "Bicycle",
     count: "1",
   },
 ];

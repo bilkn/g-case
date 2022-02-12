@@ -7,22 +7,19 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Dispatch, MouseEventHandler, SetStateAction } from "react";
+import { ChangeEvent, MouseEventHandler } from "react";
 import { ProductCard } from "../../";
 import { LeftArrowIcon, RightArrowIcon } from "../../../../../components/icons";
-import { createMockItems } from "../../../../../mocks/createMockItems";
 import { theme } from "../../../../../styles/theme";
 import { CustomPaginationItem } from "../../utils";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { CustomChip } from "../../../../../components";
-import useLogic from "./useLogic";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../../redux/store";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
-  paginationState: (
-    | { _page: string; _limit: string }
-    | Dispatch<SetStateAction<{ _page: string; _limit: string }>>
-  )[];
+  onPageChange: (event: ChangeEvent<any>, page: number) => void;
 }
 
 const LeftArrow = () => (
@@ -57,10 +54,8 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const { toggleFilter, paginationState } = props;
-  const [_, setPaginationQuery] = paginationState;
-  const { products, handlers } = useLogic({ setPaginationQuery });
-  const { handlePageChange } = handlers;
+  const products = useSelector((state: RootState) => state.product);
+  const { toggleFilter, onPageChange } = props;
 
   return (
     <>
@@ -125,7 +120,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             <aside>
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
-                  onChange={handlePageChange}
+                  onChange={onPageChange}
                   count={20}
                   siblingCount={matches ? 2 : 0}
                   renderItem={(item) => (
