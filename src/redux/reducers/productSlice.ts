@@ -1,18 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: Array<any> = [];
+const initialState: any = {
+  list: [],
+  totalItemCount: 0,
+};
 
 export const productSlice = createSlice({
   name: "product",
   initialState,
   reducers: {
-    getProducts: (state, action) => {
-    },
-    setProducts: (state, action) => {
-      const { data } = action.payload;
-      console.log(action.payload);
+    getProducts: (state, action) => {},
+    setProducts: (state, action: any) => {
+      const { data, headers } = action.payload;
+      console.log("set", data);
 
-      return [...data];
+      return {
+        list: data,
+        totalItemCount: headers["x-total-count"],
+      };
     },
   },
 });

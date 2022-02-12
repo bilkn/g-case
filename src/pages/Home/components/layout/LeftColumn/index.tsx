@@ -34,16 +34,12 @@ function LeftColumn(props: LeftColumnProps) {
             marginBottom: { xs: "10px", lg: "18px" },
           }}
         >
-          <BrandControls
-            values={brands}
-            brands={brandLabels}
-            onChange={onBrandChange}
-          />
+          <BrandControls brands={brandLabels} onChange={onBrandChange} />
         </FilterBase>
       </Box>
       <Box marginTop={"18px"}>
         <FilterBase title="Tags">
-          <TagControls values={tags} onChange={onTagChange} />
+          <TagControls onChange={onTagChange} />
         </FilterBase>
       </Box>
     </>

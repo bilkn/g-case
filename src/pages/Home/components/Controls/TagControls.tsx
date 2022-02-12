@@ -1,6 +1,8 @@
 import { Box, FormGroup, Stack } from "@mui/material";
 import { ChangeEvent } from "react";
+import { useSelector } from "react-redux";
 import { CustomCheckbox, CustomTextField } from "../../../../components";
+import { RootState } from "../../../../redux/store";
 
 const tags = [
   {
@@ -27,11 +29,11 @@ const tags = [
 
 interface TagControlsProps {
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-  values: string[] | string;
 }
 
 function TagControls(props: TagControlsProps) {
   const { onChange } = props;
+  const { totalItemCount } = useSelector((state: RootState) => state.product);
 
   return (
     <Stack>
@@ -39,7 +41,7 @@ function TagControls(props: TagControlsProps) {
         padding={{ xs: "16px", lg: "24px 24px 10px 24px" }}
         paddingBottom={{ xs: "0" }}
       >
-        <CustomTextField placeholder="Search brand" />
+        <CustomTextField placeholder="Search tag" />
       </Box>
       <FormGroup sx={{ paddingRight: "24px" }}>
         <Stack
@@ -48,11 +50,11 @@ function TagControls(props: TagControlsProps) {
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
           padding={{ xs: "16px", lg: "7px 0 24px 24px" }}
         >
-          {tags.map(({ label, count, value }) => (
+          {tags.map(({ label, value }) => (
             <CustomCheckbox
               name="tags"
               label={label}
-              extraText={`(${count})`}
+              extraText={label === "All" ? `(${totalItemCount})` : ""}
               onChange={onChange}
               value={value}
             />

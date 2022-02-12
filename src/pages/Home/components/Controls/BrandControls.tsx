@@ -5,7 +5,6 @@ import { BrandType } from "../../../../types/brandType";
 
 interface BrandControlsProps {
   onChange: (event: ChangeEvent<HTMLInputElement>, checked: boolean) => void;
-  values: string[] | [];
   brands: BrandType[];
 }
 

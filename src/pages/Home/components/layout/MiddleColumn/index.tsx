@@ -16,6 +16,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { CustomChip } from "../../../../../components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../../redux/store";
+import { ProductType } from "../../../../../types/productType";
 
 interface MiddleColumnProps {
   toggleFilter: MouseEventHandler;
@@ -54,8 +55,12 @@ const RightArrow = () => (
 
 function MiddleColumn(props: MiddleColumnProps) {
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.sm}px)`);
-  const products = useSelector((state: RootState) => state.product);
+  const { list: products, totalItemCount } = useSelector(
+    (state: RootState) => state.product
+  );
   const { toggleFilter, onPageChange } = props;
+
+  const totalPage = Math.ceil(totalItemCount / 16);
 
   return (
     <>
@@ -97,7 +102,7 @@ function MiddleColumn(props: MiddleColumnProps) {
             }}
           >
             {products.length
-              ? products.map((product, i) => (
+              ? products.map((product: ProductType, i: number) => (
                   <Grid
                     item
                     xs={12}
@@ -121,7 +126,7 @@ function MiddleColumn(props: MiddleColumnProps) {
               <Box sx={{ display: "flex", justifyContent: "center" }}>
                 <Pagination
                   onChange={onPageChange}
-                  count={20}
+                  count={totalPage}
                   siblingCount={matches ? 2 : 0}
                   renderItem={(item) => (
                     <CustomPaginationItem
