@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import MockProduct from "../../../../assets/mock-product.png";
-import { addItem } from "../../../../redux/reducers/cartSlice";
+import { addItem, calculateTotal } from "../../../../redux/reducers/cartSlice";
 import { ProductType } from "../../../../types/productType";
 import { RootState } from "../../../../redux/store";
 import { useMemo } from "react";
@@ -47,16 +47,20 @@ function ProductCard(props: ProductCardProps) {
           }}
         >
           <Typography variant="body2" fontWeight={700} color={"primary"}>
-            {price}
+            ₺ {price}
           </Typography>
           <Typography variant="body2" color="text.primary">
             {name}
           </Typography>
           <Button
             variant="contained"
+            disabled={isItemAlreadyInCart}
             fullWidth
             sx={{ boxShadow: "none", marginTop: "auto" }}
-            onClick={() => dispatch(addItem({ id, ...product }))}
+            onClick={() => {
+              dispatch(addItem({ id, ...product }));
+              dispatch(calculateTotal());
+            }}
           >
             {isItemAlreadyInCart ? "Already in cart" : "Add"}
           </Button>

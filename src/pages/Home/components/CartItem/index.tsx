@@ -1,4 +1,4 @@
-import { Box, IconButton, List, ListItem, Typography } from "@mui/material";
+import { Box, IconButton, ListItem, Typography } from "@mui/material";
 import React from "react";
 import { CustomDivider } from "../../../../components";
 import { MinusSignIcon, PlusSignIcon } from "../../../../components/icons";
@@ -7,7 +7,7 @@ import { CartItemType } from "../../../../types/cartItemType";
 
 function CartItem(props: CartItemType) {
   const { id, name, price, count } = props;
-  
+
   return (
     <>
       <ListItem>
@@ -27,7 +27,7 @@ function CartItem(props: CartItemType) {
               fontSize={{ xs: "1.2rem", lg: "1.4rem" }}
               sx={{ marginTop: "4px" }}
             >
-              {price}
+              ₺{price}
             </Typography>
           </Box>
           <Box
