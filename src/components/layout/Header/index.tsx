@@ -26,9 +26,10 @@ function Header() {
             sx={{
               alignItems: "center",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "flex-end",
               margin: "0 auto",
               maxWidth: "1222px",
+              position: "relative",
               width: "100%",
             }}
           >
@@ -54,7 +55,7 @@ function Header() {
             >
               <ShoppingBagIcon />
               <Typography variant="body2" sx={{ marginLeft: "8px" }}>
-                ₺{total}
+                ₺ {total}
               </Typography>
             </Box>
           </Box>

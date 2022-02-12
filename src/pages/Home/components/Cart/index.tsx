@@ -26,7 +26,15 @@ function Cart(props: CartProps) {
     >
       {items.length ? (
         <>
-          <List sx={{ padding: "16px 0" }}>
+          <List
+            sx={{
+              padding: "16px 0",
+              maxHeight: "426px",
+              overflowY: "auto",
+              mb: "16px",
+              overscrollBehavior: "contain",
+            }}
+          >
             <Stack spacing={"18px"}>
               {items.map((item) => (
                 <CartItem {...item} />

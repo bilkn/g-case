@@ -43,14 +43,21 @@ function CartDrawer(props: CartDrawerProps) {
       </Box>
       {items.length ? (
         <>
-          <List sx={{ padding: "16px 0" }}>
+          <List
+            sx={{
+              padding: "16px 0",
+              maxHeight: "80vh",
+              marginBottom: "16px",
+              overflowY: "auto",
+            }}
+          >
             <Stack spacing={"18px"}>
               {items.map((item) => (
                 <CartItem {...item} />
               ))}
             </Stack>
           </List>
-          <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", justifyContent: "flex-end", mt: "auto" }}>
             <Box
               sx={{
                 border: "2px solid",
