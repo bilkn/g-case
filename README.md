@@ -1,6 +1,6 @@
 # G. Study Case
 
-Greetings.
+Greetings
 
 ## Documentation
 
