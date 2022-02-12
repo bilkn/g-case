@@ -1,14 +1,7 @@
 import { FormikProps, useFormik } from "formik";
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  EventHandler,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createSearchParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../../api";
 import { getProducts } from "../../redux/reducers/productSlice";
 import { useQuery } from "react-query";
@@ -104,13 +97,6 @@ function useHomeLogic() {
       setTimeout(() => setFormikFieldValue("_page", "1"), 100);
     }
   }, [totalPage, formikValues._page, setFormikFieldValue]);
-  /* 
-  useEffect(() => {
-    navigate({
-      pathname: "/",
-      search: `?${params}`,
-    });
-  }, [formikValues, navigate]); */
 
   const handlers = {
     toggleFilter,

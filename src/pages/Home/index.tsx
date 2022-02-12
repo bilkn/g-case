@@ -13,7 +13,7 @@ function Home() {
     handleFormikChange,
     handleItemTypeClick,
   } = handlers;
-  const { _sort, tags, brands, _page,itemType } = formikValues;
+  const { _sort, tags, brands, _page, itemType } = formikValues;
   const filterValues = { _sort, tags, brands };
 
   return (
@@ -63,6 +63,7 @@ function Home() {
         onBrandChange={handleFormikChange}
         onSortingChange={handleFormikChange}
         onTagChange={handleFormikChange}
+        brands={states.brands}
       />
     </>
   );

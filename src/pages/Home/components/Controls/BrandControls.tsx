@@ -1,11 +1,5 @@
 import { Box, FormGroup, Stack } from "@mui/material";
-import React, {
-  ChangeEvent,
-  FormEventHandler,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   CustomCheckbox,

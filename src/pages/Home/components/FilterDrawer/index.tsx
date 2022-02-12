@@ -1,15 +1,9 @@
-import {
-  Box,
-  Button,
-  Drawer,
-  FormGroup,
-  Stack,
-  useMediaQuery,
-} from "@mui/material";
-import React, { ChangeEvent, MouseEventHandler } from "react";
+import { Box, Button, Drawer, Stack, useMediaQuery } from "@mui/material";
+import React, { MouseEventHandler } from "react";
 import { FilterBase } from "..";
 import { CustomDivider } from "../../../../components";
 import { theme } from "../../../../styles/theme";
+import { BrandType } from "../../../../types/brandType";
 import { FilterType } from "../../../../types/filterType";
 import { FilterValuesType } from "../../../../types/filterValuesType";
 import BrandControls from "../Controls/BrandControls";
@@ -19,12 +13,20 @@ interface FilterDrawerProps extends FilterType {
   onClose: MouseEventHandler;
   open: boolean;
   filterValues: FilterValuesType;
+  brands: BrandType[] | [];
 }
 
 function FilterDrawer(props: FilterDrawerProps) {
-  const { open, onClose, onBrandChange, onSortingChange, filterValues } = props;
+  const {
+    open,
+    onClose,
+    onBrandChange,
+    onSortingChange,
+    filterValues,
+    brands,
+  } = props;
   const matches = useMediaQuery(`(min-width:${theme.breakpoints.values.lg}px)`);
-  const { _sort, tags } = filterValues;
+  const { _sort } = filterValues;
 
   return (
     <Drawer
@@ -57,11 +59,11 @@ function FilterDrawer(props: FilterDrawerProps) {
         <FilterBase mobile title="Sorting">
           <SortingControls value={_sort} onChange={onSortingChange} />
         </FilterBase>
-        {/*    <FilterBase mobile title="Brands">
-          <BrandControls />
-        </FilterBase> */}
+        <FilterBase mobile title="Brands">
+          <BrandControls brands={brands} onChange={onBrandChange} />
+        </FilterBase>
         <FilterBase mobile title="Tags">
-          <TagControls  onChange={onBrandChange} />
+          <TagControls onChange={onBrandChange} />
         </FilterBase>
       </Stack>
     </Drawer>
