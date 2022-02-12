@@ -1,6 +1,8 @@
 import { Box, FormGroup, Stack } from "@mui/material";
 import React, { ChangeEvent, FormEventHandler } from "react";
+import { useSelector } from "react-redux";
 import { CustomCheckbox, CustomTextField } from "../../../../components";
+import { RootState } from "../../../../redux/store";
 import { BrandType } from "../../../../types/brandType";
 
 interface BrandControlsProps {
@@ -10,6 +12,7 @@ interface BrandControlsProps {
 
 function BrandControls(props: BrandControlsProps) {
   const { onChange, brands = [] } = props;
+  const { totalItemCount } = useSelector((state: RootState) => state.product);
 
   return (
     <Stack>
@@ -26,16 +29,28 @@ function BrandControls(props: BrandControlsProps) {
           padding={{ xs: "16px", lg: "7px 0 30px 27px" }}
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
         >
-          {brands.length
-            ? brands.map(({ name, slug }) => (
+          {brands.length ? (
+            <>
+              <CustomCheckbox
+                name="brands"
+                label={"All"}
+                extraText={`(${totalItemCount})`}
+                onChange={onChange}
+                value={""}
+                defaultChecked
+              />
+              {brands.map(({ name, slug }, i: number) => (
                 <CustomCheckbox
                   name="brands"
                   label={name}
                   onChange={onChange}
                   value={slug}
                 />
-              ))
-            : "Loading"}
+              ))}
+            </>
+          ) : (
+            "Loading"
+          )}
         </Stack>
       </FormGroup>
     </Stack>

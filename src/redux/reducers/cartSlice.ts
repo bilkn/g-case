@@ -21,20 +21,20 @@ export const cartSlice = createSlice({
     },
     increaseItemCount: (state, action) => {
       state.items = state.items.map((item) =>
-        item.id === action.payload
+        item.slug === action.payload
           ? { ...item, count: (item?.count || 1) + 1 }
           : item
       );
     },
     decreaseItemCount: (state, action) => {
-      const item = state.items.find((item) => item.id === action.payload);
+      const item = state.items.find((item) => item.slug === action.payload);
 
       if (!item?.count) return;
       if (item.count <= 1) {
-        state.items = state.items.filter((item) => item.id !== action.payload);
+        state.items = state.items.filter((item) => item.slug !== action.payload);
       } else {
         state.items = state.items.map((item) =>
-          item.id === action.payload
+          item.slug === action.payload
             ? { ...item, count: (item?.count || 2) - 1 }
             : item
         );

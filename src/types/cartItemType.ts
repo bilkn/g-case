@@ -1,5 +1,5 @@
 export interface CartItemType {
-  id: number;
+  slug: string;
   name: string;
   price: number;
   count?: number;

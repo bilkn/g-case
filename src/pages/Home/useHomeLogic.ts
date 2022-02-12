@@ -67,7 +67,9 @@ function useHomeLogic() {
       brands.forEach((brand) => searchParams.append("manufacturer", brand));
     }
     if (tags.length) {
-      tags.forEach((tag, i) => searchParams.append(`tags_like`, tag));
+      tags.forEach(
+        (tag) => tag !== "All" && searchParams.append(`tags_like`, tag)
+      );
     }
 
     dispatch(getProducts(searchParams));

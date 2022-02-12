@@ -43,20 +43,21 @@ function TagControls(props: TagControlsProps) {
       >
         <CustomTextField placeholder="Search tag" />
       </Box>
-      <FormGroup sx={{ paddingRight: "24px" }}>
+      <FormGroup defaultChecked sx={{ paddingRight: "24px" }}>
         <Stack
           spacing={"18px"}
           height={{ lg: "142px" }}
           sx={{ overflowY: "auto", overscrollBehavior: "contain" }}
           padding={{ xs: "16px", lg: "7px 0 24px 24px" }}
         >
-          {tags.map(({ label, value }) => (
+          {tags.map(({ label, value }, i: number) => (
             <CustomCheckbox
               name="tags"
               label={label}
               extraText={label === "All" ? `(${totalItemCount})` : ""}
               onChange={onChange}
               value={value}
+              defaultChecked={i === 0}
             />
           ))}
         </Stack>

@@ -1,6 +1,6 @@
 import { Box, IconButton, ListItem, Typography } from "@mui/material";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { CustomDivider } from "../../../../components";
 import { MinusSignIcon, PlusSignIcon } from "../../../../components/icons";
 import {
@@ -12,7 +12,7 @@ import { theme } from "../../../../styles/theme";
 import { CartItemType } from "../../../../types/cartItemType";
 
 function CartItem(props: CartItemType) {
-  const { id, name, price, count } = props;
+  const { slug, name, price, count } = props;
   const dispatch = useDispatch();
 
   return (
@@ -48,7 +48,7 @@ function CartItem(props: CartItemType) {
               sx={{ color: "inherit", width: "32px" }}
               disableRipple
               onClick={() => {
-                dispatch(decreaseItemCount(id));
+                dispatch(decreaseItemCount(slug));
                 dispatch(calculateTotal());
               }}
             >
@@ -78,7 +78,7 @@ function CartItem(props: CartItemType) {
               sx={{ color: "inherit", width: "32px" }}
               disableRipple
               onClick={() => {
-                dispatch(increaseItemCount(id));
+                dispatch(increaseItemCount(slug));
                 dispatch(calculateTotal());
               }}
             >
